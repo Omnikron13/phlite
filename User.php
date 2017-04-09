@@ -189,6 +189,14 @@ class User {
         //TODO: log IP of attempt?
     }
 
+    protected function setFailureCount(int $c) : void {
+        $q = DB::get()->prepare('UPDATE users SET failureCount = :c WHERE id = :i');
+        $q->bindValue(':c', $c,        PDO::PARAM_INT);
+        $q->bindValue(':i', $this->id, PDO::PARAM_INT);
+        $q->execute();
+        $this->failureCount = $c;
+    }
+
     /******************
      * Sessions logic *
      ******************/
