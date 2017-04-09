@@ -170,6 +170,16 @@ class User {
         ];
     }
 
+    protected function loginFailure(float $t) : void {
+        $this->failureTime = $t;
+        $this->failureCount += 1;
+        $q = DB::get()->prepare('UPDATE users SET failureTime = :t, failureCount = :c WHERE id = :i');
+        $q->bindValue(':t', $t);
+        $q->bindValue(':c', $this->failureCount, PDO::PARAM_INT);
+        $q->bindValue(':i', $this->id, PDO::PARAM_INT);
+        $q->execute();
+    }
+
     /******************
      * Sessions logic *
      ******************/
