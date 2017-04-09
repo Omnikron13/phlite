@@ -155,6 +155,14 @@ class User {
             ];
         }
         //TODO: brute force protection logic
+        $t = gettimeofday(true);
+        if($t < $u->failureTime + Config::get('user', 'login_frequency_limit')) {
+            $u->loginFailure($t);
+            return [
+                'success' => false,
+                'code'    => self::LOGIN_ERROR['FREQUENCY_EXCEEDED'],
+            ];
+        }
         if(!$u->checkPassword($password)) {
             $u->loginFailure($t);
             return [
