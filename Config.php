@@ -16,6 +16,14 @@ class Config {
             self::load();
         return self::$data[$section][$param];
     }
+
+    protected static function merge(array $a) : void {
+        foreach($a as $section => $params) {
+            foreach($params as $k => $v) {
+                self::$data[$section][$k] = $v;
+            }
+        }
+    }
 }
 
 ?>
