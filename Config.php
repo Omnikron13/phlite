@@ -6,9 +6,16 @@ class Config {
 
     protected static $data = NULL;
 
-    public static function load(string $file = self::DEFAULT_FILE) : void {
+    public static function load(?string $file = NULL) : void {
+        if(self::$data === NULL) {
+            $s = file_get_contents(self::DEFAULT_FILE, FILE_USE_INCLUDE_PATH);
+            self::$data = parse_ini_string($s, true, INI_SCANNER_TYPED);
+        }
+        if($file === NULL)
+            return;
         $s = file_get_contents($file, FILE_USE_INCLUDE_PATH);
-        self::$data = parse_ini_string($s, true, INI_SCANNER_TYPED);
+        $a = parse_ini_string($s, true, INI_SCANNER_TYPED);
+        self::merge($a);
     }
 
     public static function get(string $section, string $param) {
