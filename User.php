@@ -157,7 +157,7 @@ class User {
         $t = gettimeofday(true);
         if($u->failureCount >= Config::get('user', 'login_failure_limit')) {
             if($t < $u->failureTime + Config::get('user', 'login_failure_cooldown')) {
-                $u->loginFailure($t);
+                $u->loginFailure();
                 return [
                     'success' => false,
                     'code'    => self::LOGIN_ERROR['USER_IN_COOLDOWN'],
@@ -166,14 +166,14 @@ class User {
             $this->setFailureCount(0);
         }
         if($t < $u->failureTime + Config::get('user', 'login_frequency_limit')) {
-            $u->loginFailure($t);
+            $u->loginFailure();
             return [
                 'success' => false,
                 'code'    => self::LOGIN_ERROR['FREQUENCY_EXCEEDED'],
             ];
         }
         if(!$u->checkPassword($password)) {
-            $u->loginFailure($t);
+            $u->loginFailure();
             return [
                 'success' => false,
                 'code'    => self::LOGIN_ERROR['INCORRECT_PASSWORD'],
@@ -188,11 +188,11 @@ class User {
         ];
     }
 
-    protected function loginFailure(float $t) : void {
-        $this->failureTime = $t;
+    protected function loginFailure() : void {
+        $this->failureTime = $_SERVER['REQUEST_TIME_FLOAT'];
         $this->failureCount += 1;
         $q = DB::get()->prepare('UPDATE users SET failureTime = :t, failureCount = :c WHERE id = :i');
-        $q->bindValue(':t', $t);
+        $q->bindValue(':t', $_SERVER['REQUEST_TIME_FLOAT']);
         $q->bindValue(':c', $this->failureCount, PDO::PARAM_INT);
         $q->bindValue(':i', $this->id, PDO::PARAM_INT);
         $q->execute();
