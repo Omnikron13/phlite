@@ -156,6 +156,16 @@ class User {
         }
         //TODO: brute force protection logic
         $t = gettimeofday(true);
+        if($u->failureCount >= Config::get('user', 'login_failure_limit')) {
+            if($t < $u->failureTime + Config::get('user', 'login_failure_cooldown')) {
+                $u->loginFailure($t);
+                return [
+                    'success' => false,
+                    'code'    => self::LOGIN_ERROR['USER_IN_COOLDOWN'],
+                ];
+            }
+            $this->setFailureCount(0);
+        }
         if($t < $u->failureTime + Config::get('user', 'login_frequency_limit')) {
             $u->loginFailure($t);
             return [
