@@ -2,7 +2,7 @@
 namespace PHlite;
 
 class Config {
-    protected const DEFAULT_FILE = 'phlite.cfg';
+    protected const DEFAULT_FILE = 'defaults.cfg';
 
     protected static $data = NULL;
 
