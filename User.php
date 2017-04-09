@@ -178,6 +178,7 @@ class User {
         $q->bindValue(':c', $this->failureCount, PDO::PARAM_INT);
         $q->bindValue(':i', $this->id, PDO::PARAM_INT);
         $q->execute();
+        //TODO: log IP of attempt?
     }
 
     /******************
