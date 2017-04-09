@@ -181,6 +181,7 @@ class User {
             ];
         }
         $s = $u->startSession();
+        $u->setFailureCount(0);
         return [
             'success' => true,
             'user'    => $u,
