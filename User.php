@@ -156,7 +156,7 @@ class User {
         }
         //TODO: brute force protection logic
         if(!$u->checkPassword($password)) {
-            //TODO: log failure
+            $u->loginFailure($t);
             return [
                 'success' => false,
                 'code'    => self::LOGIN_ERROR['INCORRECT_PASSWORD'],
