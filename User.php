@@ -154,7 +154,6 @@ class User {
                 'code'    => self::LOGIN_ERROR['NO_SUCH_USER'],
             ];
         }
-        //TODO: brute force protection logic
         $t = gettimeofday(true);
         if($u->failureCount >= Config::get('user', 'login_failure_limit')) {
             if($t < $u->failureTime + Config::get('user', 'login_failure_cooldown')) {
