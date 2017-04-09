@@ -289,8 +289,8 @@ class User {
         $t = password_hash($t, PASSWORD_BCRYPT, $opt);
         $sql = 'UPDATE users SET requestToken = :t WHERE id = :i';
         $q = DB::get()->prepare($sql);
-        $q->bindValue(':t', $t, PDO::PARAM_STR);
-        $q->bindValue(':i', $i, PDO::PARAM_INT);
+        $q->bindValue(':t', $t,        PDO::PARAM_STR);
+        $q->bindValue(':i', $this->id, PDO::PARAM_INT);
         $q->execute();
         $this->requestToken = $t;
     }
