@@ -154,7 +154,7 @@ class User {
                 'code'    => self::LOGIN_ERROR['NO_SUCH_USER'],
             ];
         }
-        $t = gettimeofday(true);
+        $t = $_SERVER['REQUEST_TIME_FLOAT'];
         if($u->failureCount >= Config::get('user', 'login_failure_limit')) {
             if($t < $u->failureTime + Config::get('user', 'login_failure_cooldown')) {
                 $u->loginFailure();
