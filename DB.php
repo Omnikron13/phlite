@@ -13,6 +13,10 @@ class DB {
         return self::$pdo;
     }
 
+    public static function prepare(string $sql) : PDOStatement {
+        return self::get()->prepare($sql);
+    }
+
     public static function exec(string $sql) : int {
         return self::get()->exec($sql);
     }
