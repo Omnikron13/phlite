@@ -4,6 +4,7 @@ namespace PHlite;
 require_once "Config.php";
 
 use PDO;
+use PDOStatement;
 
 class DB {
     protected static $pdo = NULL;
