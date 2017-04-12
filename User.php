@@ -240,26 +240,6 @@ class User {
         }
     }
 
-    //Remove oldest session if max_sessions reached
-    protected function freeSession() : void {
-        //Return early if max_sessions not reached
-        if(count($this->sessions) < Config::get('user', 'max_sessions'))
-            return;
-        //Pull UID and key of oldest session
-        $q = DB::get()->prepare('SELECT * FROM users_sessions WHERE userID = :i ORDER BY active ASC LIMIT 1');
-        $q->bindValue(':i', $this->id, PDO::PARAM_INT);
-        $q->execute();
-        $q->bindColumn('id',  $id,  PDO::PARAM_INT);
-        $q->bindColumn('key', $key, PDO::PARAM_STR);
-        $q->fetch(PDO::FETCH_BOUND);
-        //Remove oldest session from the DB
-        $q = DB::get()->prepare('DELETE FROM users_sessions WHERE id = :i');
-        $q->bindValue(':i', $id, PDO::PARAM_INT);
-        $q->execute();
-        //Clean now-deleted session data from the active User object
-        unset($this->sessions[$key]);
-    }
-
     protected function clearCookies() : void {
         setcookie('userID',     NULL, -1);
         setcookie('sessionKey', NULL, -1);
