@@ -293,13 +293,6 @@ class User {
         unset($_COOKIE['sessionKey']);
     }
 
-    protected static function hashSessionKey(string $k) : string {
-        $opt = [
-            'cost' => Config::get('user', 'session_key_hash_cost'),
-        ];
-        return password_hash($k, PASSWORD_BCRYPT, $opt);
-    }
-
     /*******************
      * CSRF Protection *
      *******************/
