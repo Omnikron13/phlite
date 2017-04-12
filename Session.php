@@ -129,6 +129,10 @@ class Session {
         );
         $_COOKIE[$k] = $v;
     }
+
+    protected static function clearCookie(string $k) : void {
+        self::sendCookie($k, NULL, -1);
+    }
 }
 
 ?>
