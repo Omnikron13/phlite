@@ -215,13 +215,6 @@ class User {
         return Session::start($this);
     }
 
-    protected function clearCookies() : void {
-        setcookie('userID',     NULL, -1);
-        setcookie('sessionKey', NULL, -1);
-        unset($_COOKIE['userID']);
-        unset($_COOKIE['sessionKey']);
-    }
-
     /*******************
      * CSRF Protection *
      *******************/
