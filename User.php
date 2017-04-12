@@ -260,32 +260,6 @@ class User {
         unset($this->sessions[$key]);
     }
 
-    protected function sendCookies(string $key, int $duration = 0) : void {
-        if($duration > 0)
-            $duration += time();
-        //TODO: load config for cookie params
-        setcookie(
-            'userID',
-            $this->id,
-            $duration,
-            NULL,       //path
-            NULL,       //domain
-            false,      //secure (https only)
-            true        //HttpOnly - hidden from js
-        );
-        setcookie(
-            'sessionKey',
-            $key,
-            $duration,
-            NULL,       //path
-            NULL,       //domain
-            false,      //secure (https only)
-            true        //HttpOnly - hidden from js
-        );
-        $_COOKIE['userID']     = $this->id;
-        $_COOKIE['sessionKey'] = $key;
-    }
-
     protected function clearCookies() : void {
         setcookie('userID',     NULL, -1);
         setcookie('sessionKey', NULL, -1);
