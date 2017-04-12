@@ -211,20 +211,8 @@ class User {
     /******************
      * Sessions logic *
      ******************/
-    public function startSession() : string {
-        $this->freeSession();
-        $key  = self::generateSessionKey();
-        $hash = self::hashSessionKey($key);
-        $ip   = $_SERVER['REMOTE_ADDR'];
-        $q = DB::get()->prepare('INSERT INTO users_sessions(userID, key, IP, active) VALUES(:u, :k, :i, :a)');
-        $q->bindValue(':u', $this->id, PDO::PARAM_INT);
-        $q->bindValue(':k', $hash,     PDO::PARAM_STR);
-        $q->bindValue(':i', $ip,       PDO::PARAM_STR);
-        $q->bindValue(':a', time(),    PDO::PARAM_INT);
-        $q->execute();
-        $this->sessions[$hash] = $ip;
-        $this->sendCookies($key);
-        return $key;
+    public function startSession() : Session {
+        return Session::start($this);
     }
 
     public function checkSession(string $k) : bool {
