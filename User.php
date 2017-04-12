@@ -5,6 +5,7 @@ use PDO;
 
 require_once 'DB.php';
 require_once 'Base64.php';
+require_once 'Session.php';
 
 class User {
     //Flags
