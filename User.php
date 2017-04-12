@@ -293,11 +293,6 @@ class User {
         unset($_COOKIE['sessionKey']);
     }
 
-    protected static function generateSessionKey() : string {
-        $k = random_bytes(Config::get('user', 'session_key_bytes'));
-        return Base64::encode($k);
-    }
-
     protected static function hashSessionKey(string $k) : string {
         $opt = [
             'cost' => Config::get('user', 'session_key_hash_cost'),
