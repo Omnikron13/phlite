@@ -29,7 +29,6 @@ class User {
     protected $failureCount = NULL;
     protected $failureTime  = NULL;
     protected $requestToken = NULL;
-    protected $sessions     = [];
 
     public function __construct($uid, int $mode = self::GET_BY_ID) {
         switch($mode) {
@@ -59,12 +58,6 @@ class User {
         //TODO: throw better exception
         if($this->id === NULL)
             throw new \Exception('User not found');
-        //Load sessions from DB
-        $q = DB::prepare('SELECT * FROM users_sessions WHERE userID = :i');
-        $q->bindValue(':i', $this->id, PDO::PARAM_INT);
-        $q->execute();
-        foreach($q->fetchAll(PDO::FETCH_ASSOC) as $s)
-            $this->sessions[$s['key']] = $s['IP'];
     }
 
     public function __toString() : string {
