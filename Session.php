@@ -40,6 +40,8 @@ class Session {
     public function check(?string $k = NULL) : bool {
         if($k === NULL)
             $k = $_COOKIE['sessionKey'];
+        if($_SERVER['REMOTE_ADDR'] != $this->IP)
+            return false;
         return password_verify($k, $this->key);
     }
 
