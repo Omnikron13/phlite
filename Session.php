@@ -54,7 +54,14 @@ class Session {
         $this->active = $_SERVER['REQUEST_TIME'];
     }
 
-    //TODO: end()
+    public function end() : void {
+        $sql = 'DELETE FROM users_sessions WHERE id = :i';
+        $q = DB::prepare($sql);
+        $q->bindValue(':i', $this->id, PDO::PARAM_INT);
+        $q->execute();
+        self::clearCookie('sessionID');
+        self::clearCookie('sessionKey');
+    }
 
     public static function getCurrent() : ?self {
         if(!isset($_COOKIE['sessionID']))
