@@ -59,7 +59,10 @@ class Session {
     public static function getCurrent() : ?self {
         if(!isset($_COOKIE['sessionID']))
             return NULL;
-        return new self($_COOKIE['sessionID']);
+        $s = new self($_COOKIE['sessionID']);
+        if(!$s->check())
+            return NULL;
+        return $s;
     }
 
     public static function start(User $u) : self {
