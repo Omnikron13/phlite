@@ -215,16 +215,6 @@ class User {
         return Session::start($this);
     }
 
-    public function checkSession(string $k) : bool {
-        foreach($this->sessions as $hash => $ip) {
-            if(!password_verify($k, $hash))
-                continue;
-            if($ip = $_SERVER['REMOTE_ADDR'])
-                return true;
-        }
-        return false;
-    }
-
     public function endSession(string $k) : void {
         foreach($this->sessions as $hash => $ip) {
             if(!password_verify($k, $hash))
