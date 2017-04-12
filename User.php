@@ -35,12 +35,12 @@ class User {
         switch($mode) {
             case self::GET_BY_ID:
                 $sql = 'SELECT * FROM users WHERE id = :i';
-                $q = DB::get()->prepare($sql);
+                $q = DB::prepare($sql);
                 $q->bindValue(':i', $uid, PDO::PARAM_INT);
                 break;
             case self::GET_BY_USERNAME:
                 $sql = 'SELECT * FROM users WHERE username = :u';
-                $q = DB::get()->prepare($sql);
+                $q = DB::prepare($sql);
                 $q->bindValue(':u', $uid, PDO::PARAM_STR);
                 break;
             default:
@@ -60,7 +60,7 @@ class User {
         if($this->id === NULL)
             throw new \Exception('User not found');
         //Load sessions from DB
-        $q = DB::get()->prepare('SELECT * FROM users_sessions WHERE userID = :i');
+        $q = DB::prepare('SELECT * FROM users_sessions WHERE userID = :i');
         $q->bindValue(':i', $this->id, PDO::PARAM_INT);
         $q->execute();
         foreach($q->fetchAll(PDO::FETCH_ASSOC) as $s)
@@ -87,7 +87,7 @@ class User {
     public function setUsername(string $u) : void {
         //TODO: validate
         $sql = 'UPDATE users SET username = :u WHERE id = :i';
-        $q = DB::get()->prepare($sql);
+        $q = DB::prepare($sql);
         $q->bindValue(':u', $u, PDO::PARAM_STR);
         $q->bindValue(':i', $i, PDO::PARAM_INT);
         $q->execute();
@@ -97,7 +97,7 @@ class User {
     public function setEmail(string $e) : void {
         //TODO: validate
         $sql = 'UPDATE users SET email = :e WHERE id = :i';
-        $q = DB::get()->prepare($sql);
+        $q = DB::prepare($sql);
         $q->bindValue(':e', $e, PDO::PARAM_STR);
         $q->bindValue(':i', $i, PDO::PARAM_INT);
         $q->execute();
@@ -111,7 +111,7 @@ class User {
         //TODO: validate
         $p = self::hashPassword($p);
         $sql = 'UPDATE users SET password = :p WHERE id = :i';
-        $q = DB::get()->prepare($sql);
+        $q = DB::prepare($sql);
         $q->bindValue(':p', $p, PDO::PARAM_STR);
         $q->bindValue(':i', $i, PDO::PARAM_INT);
         $q->execute();
@@ -192,7 +192,7 @@ class User {
     protected function loginFailure() : void {
         $this->failureTime = $_SERVER['REQUEST_TIME_FLOAT'];
         $this->failureCount += 1;
-        $q = DB::get()->prepare('UPDATE users SET failureTime = :t, failureCount = :c WHERE id = :i');
+        $q = DB::prepare('UPDATE users SET failureTime = :t, failureCount = :c WHERE id = :i');
         $q->bindValue(':t', $_SERVER['REQUEST_TIME_FLOAT']);
         $q->bindValue(':c', $this->failureCount, PDO::PARAM_INT);
         $q->bindValue(':i', $this->id, PDO::PARAM_INT);
@@ -201,7 +201,7 @@ class User {
     }
 
     protected function setFailureCount(int $c) : void {
-        $q = DB::get()->prepare('UPDATE users SET failureCount = :c WHERE id = :i');
+        $q = DB::prepare('UPDATE users SET failureCount = :c WHERE id = :i');
         $q->bindValue(':c', $c,        PDO::PARAM_INT);
         $q->bindValue(':i', $this->id, PDO::PARAM_INT);
         $q->execute();
@@ -224,7 +224,7 @@ class User {
         ];
         $t = password_hash($t, PASSWORD_BCRYPT, $opt);
         $sql = 'UPDATE users SET requestToken = :t WHERE id = :i';
-        $q = DB::get()->prepare($sql);
+        $q = DB::prepare($sql);
         $q->bindValue(':t', $t,        PDO::PARAM_STR);
         $q->bindValue(':i', $this->id, PDO::PARAM_INT);
         $q->execute();
@@ -247,7 +247,7 @@ class User {
         //TODO: verify
         $password = self::hashPassword($password);
         $sql = 'INSERT INTO users(username, password, email, registerTime) VALUES(:u, :p, :e, :t)';
-        $query = DB::get()->prepare($sql);
+        $query = DB::prepare($sql);
         $query->bindValue(':u', $username, PDO::PARAM_STR);
         $query->bindValue(':p', $password, PDO::PARAM_STR);
         $query->bindValue(':e', $email,    PDO::PARAM_STR);
