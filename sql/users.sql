@@ -4,7 +4,6 @@ CREATE TABLE IF NOT EXISTS users(
     email        TEXT    NOT NULL COLLATE NOCASE,
     password     TEXT    NOT NULL,
     registerTime INTEGER NOT NULL,
-    loginTime    INTEGER,
     failureCount INTEGER,
     failureTime  REAL,
     requestToken TEXT
