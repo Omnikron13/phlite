@@ -55,7 +55,7 @@ class Session {
     //TODO: end()
 
     public static function getCurrent() : ?self {
-        if(!isset($_COOKIE['sessionID'])
+        if(!isset($_COOKIE['sessionID']))
             return NULL;
         return new self($_COOKIE['sessionID']);
     }
