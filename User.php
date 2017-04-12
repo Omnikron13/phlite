@@ -242,6 +242,13 @@ class User {
         return new self($username, self::GET_BY_USERNAME);
     }
 
+    public static function getCurrent() : ?self {
+        $s = Session::getCurrent();
+        if($s === NULL)
+            return NULL;
+        return $s->getUser();
+    }
+
     public static function setupDB() : void {
         DB::execFile('sql/users.sql');
         DB::execFile('sql/users_verify.sql');
