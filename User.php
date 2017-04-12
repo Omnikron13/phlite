@@ -215,21 +215,6 @@ class User {
         return Session::start($this);
     }
 
-    public function endSession(string $k) : void {
-        foreach($this->sessions as $hash => $ip) {
-            if(!password_verify($k, $hash))
-                continue;
-            $q = DB::get()->prepare('DELETE FROM users_sessions WHERE key = :k AND IP = :ip');
-            $q->bindValue(':k',  $hash, PDO::PARAM_STR);
-            $q->bindValue(':ip', $ip,   PDO::PARAM_STR);
-            $q->execute();
-            unset($this->sessions[$hash]);
-            //TODO: clear cookies
-            $this->clearCookies();
-            return;
-        }
-    }
-
     protected function clearCookies() : void {
         setcookie('userID',     NULL, -1);
         setcookie('sessionKey', NULL, -1);
