@@ -253,6 +253,7 @@ class User {
         DB::execFile('sql/users.sql');
         DB::execFile('sql/users_verify.sql');
         DB::execFile('sql/users_sessions.sql');
+        DB::execFile('sql/users_logins.sql');
     }
 }
 
