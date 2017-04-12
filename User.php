@@ -173,7 +173,7 @@ class User {
                 'code'    => self::LOGIN_ERROR['INCORRECT_PASSWORD'],
             ];
         }
-        $s = $u->startSession();
+        $s = Session::start($u);
         $u->setFailureCount(0);
         return [
             'success' => true,
