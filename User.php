@@ -201,13 +201,6 @@ class User {
         $this->failureCount = $c;
     }
 
-    /******************
-     * Sessions logic *
-     ******************/
-    public function startSession() : Session {
-        return Session::start($this);
-    }
-
     /*******************
      * CSRF Protection *
      *******************/
