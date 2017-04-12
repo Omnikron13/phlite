@@ -115,7 +115,7 @@ class Session {
         return password_hash($k, PASSWORD_BCRYPT, $opt);
     }
 
-    protected static function sendCookie(string $k, string $v, int $d = 0) : void {
+    protected static function sendCookie(string $k, ?string $v, int $d = 0) : void {
         if($d > 0)
             $d += $_SERVER['REQUEST_TIME'];
         setcookie(
