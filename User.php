@@ -219,6 +219,15 @@ class User {
         return $q->fetchColumn() ?: NULL;
     }
 
+    protected function getLoginFailCount(float $t) : int {
+        $sql = 'SELECT COUNT(*) FROM users_logins_fail_view WHERE userID = :u AND time > :t';
+        $q = DB::prepare($sql);
+        $q->bindValue(':u', $this->id, PDO::PARAM_INT);
+        $q->bindValue(':t', $t);
+        $q->execute();
+        return $q->fetchColumn();
+    }
+
     /*******************
      * CSRF Protection *
      *******************/
