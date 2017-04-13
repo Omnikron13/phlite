@@ -10,4 +10,4 @@ CREATE TABLE IF NOT EXISTS users_logins(
 );
 
 CREATE VIEW IF NOT EXISTS users_logins_fail_view AS
-    SELECT id, userID, time, IP FROM users_logins WHERE success = 0 ORDER BY time ASC;
+    SELECT id, userID, time, IP FROM users_logins WHERE success = 0 ORDER BY time DESC;
