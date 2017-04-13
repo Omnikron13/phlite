@@ -26,8 +26,6 @@ class User {
     protected $password     = NULL;
     protected $email        = NULL;
     protected $registerTime = NULL;
-    protected $failureCount = NULL;
-    protected $failureTime  = NULL;
     protected $requestToken = NULL;
 
     public function __construct($uid, int $mode = self::GET_BY_ID) {
@@ -51,8 +49,6 @@ class User {
         $q->bindColumn('password',     $this->password,     PDO::PARAM_STR);
         $q->bindColumn('email',        $this->email,        PDO::PARAM_STR);
         $q->bindColumn('registerTime', $this->registerTime, PDO::PARAM_INT);
-        $q->bindColumn('failureCount', $this->failureCount, PDO::PARAM_INT);
-        $q->bindColumn('failureTime',  $this->failureTime);
         $q->bindColumn('requestToken', $this->requestToken, PDO::PARAM_STR);
         $q->fetch(PDO::FETCH_BOUND);
         //TODO: throw better exception
