@@ -172,7 +172,6 @@ class User {
         }
 
         if(!$u->checkPassword($password)) {
-            $u->loginFailure();
             $u->logLogin(false);
             return [
                 'success' => false,
