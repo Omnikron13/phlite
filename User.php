@@ -211,6 +211,14 @@ class User {
         $q->execute();
     }
 
+    protected function getLastLoginFailTime() : ?float {
+        $sql = 'SELECT time FROM users_logins_fail_view WHERE userID = :u LIMIT 1';
+        $q = DB::prepare($sql);
+        $q->bindValue(':u', $this->id, PDO::PARAM_INT);
+        $q->execute();
+        return $q->fetchColumn() ?: NULL;
+    }
+
     /*******************
      * CSRF Protection *
      *******************/
