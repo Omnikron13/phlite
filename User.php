@@ -201,6 +201,16 @@ class User {
         $this->failureCount = $c;
     }
 
+    protected function logLogin(bool $success) : void {
+        $sql = 'INSERT INTO users_logins(userID, success, time, IP) VALUES(:u, :s, :t, :i)';
+        $q = DB::prepare($sql);
+        $q->bindValue(':u', $this->id, PDO::PARAM_INT);
+        $q->bindValue(':s', $success,  PDO::PARAM_BOOL);
+        $q->bindValue(':t', $_SERVER['REQUEST_TIME_FLOAT']);
+        $q->bindValue(':i', $_SERVER['REMOTE_ADDR'], PDO::PARAM_STR);
+        $q->execute();
+    }
+
     /*******************
      * CSRF Protection *
      *******************/
