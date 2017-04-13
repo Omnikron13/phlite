@@ -148,24 +148,29 @@ class User {
                 'code'    => self::LOGIN_ERROR['NO_SUCH_USER'],
             ];
         }
-        $t = $_SERVER['REQUEST_TIME_FLOAT'];
-        if($u->failureCount >= Config::get('user', 'login_failure_limit')) {
-            if($t < $u->failureTime + Config::get('user', 'login_failure_cooldown')) {
-                $u->loginFailure();
-                return [
-                    'success' => false,
-                    'code'    => self::LOGIN_ERROR['USER_IN_COOLDOWN'],
-                ];
-            }
-            $this->setFailureCount(0);
-        }
-        if($t < $u->failureTime + Config::get('user', 'login_frequency_limit')) {
-            $u->loginFailure();
+
+        //Check for unnaturally frequent login attempts
+        $ft = $u->getLastLoginFailTime();
+        if($_SERVER['REQUEST_TIME_FLOAT'] < $ft + Config::get('user', 'login_frequency_limit')) {
+            $u->logLogin(false);
             return [
                 'success' => false,
                 'code'    => self::LOGIN_ERROR['FREQUENCY_EXCEEDED'],
             ];
         }
+
+        //Check if user is in brute-force cooldown
+        $fc = $u->getLoginFailCount($ft - Config::get('user', 'login_failure_period'));
+        if($fc >= Config::get('user', 'login_failure_limit')) {
+            if($_SERVER['REQUEST_TIME_FLOAT'] < $ft + Config::get('user', 'login_failure_cooldown')) {
+                $u->logLogin(false);
+                return [
+                    'success' => false,
+                    'code'    => self::LOGIN_ERROR['USER_IN_COOLDOWN'],
+                ];
+            }
+        }
+
         if(!$u->checkPassword($password)) {
             $u->loginFailure();
             $u->logLogin(false);
