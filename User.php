@@ -175,6 +175,7 @@ class User {
             ];
         }
         $s = Session::start($u);
+        $u->logLogin(true);
         $u->setFailureCount(0);
         return [
             'success' => true,
