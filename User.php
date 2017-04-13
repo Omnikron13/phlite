@@ -187,25 +187,6 @@ class User {
         ];
     }
 
-    protected function loginFailure() : void {
-        $this->failureTime = $_SERVER['REQUEST_TIME_FLOAT'];
-        $this->failureCount += 1;
-        $q = DB::prepare('UPDATE users SET failureTime = :t, failureCount = :c WHERE id = :i');
-        $q->bindValue(':t', $_SERVER['REQUEST_TIME_FLOAT']);
-        $q->bindValue(':c', $this->failureCount, PDO::PARAM_INT);
-        $q->bindValue(':i', $this->id, PDO::PARAM_INT);
-        $q->execute();
-        //TODO: log IP of attempt?
-    }
-
-    protected function setFailureCount(int $c) : void {
-        $q = DB::prepare('UPDATE users SET failureCount = :c WHERE id = :i');
-        $q->bindValue(':c', $c,        PDO::PARAM_INT);
-        $q->bindValue(':i', $this->id, PDO::PARAM_INT);
-        $q->execute();
-        $this->failureCount = $c;
-    }
-
     protected function logLogin(bool $success) : void {
         $sql = 'INSERT INTO users_logins(userID, success, time, IP) VALUES(:u, :s, :t, :i)';
         $q = DB::prepare($sql);
