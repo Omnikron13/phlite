@@ -168,6 +168,7 @@ class User {
         }
         if(!$u->checkPassword($password)) {
             $u->loginFailure();
+            $u->logLogin(false);
             return [
                 'success' => false,
                 'code'    => self::LOGIN_ERROR['INCORRECT_PASSWORD'],
