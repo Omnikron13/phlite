@@ -227,13 +227,39 @@ class User {
     }
 
     public function generateRequestToken() : string {
+        //TODO: free token
         $t = random_bytes(Config::get('user', 'request_token_bytes'));
-        $this->setRequestToken($t);
-        return Base64::encode($t);
+        $t = Base64::encode($t);
+        $hash = self::hashRequestToken($t);
+        $sql = 'INSERT INTO users_request_tokens(userID, token, time) VALUES(:u, :to, :ti)';
+        $q = DB::prepare($sql);
+        $q->bindValue(':u',  $this->id,                PDO::PARAM_INT);
+        $q->bindValue(':to', $hash,                    PDO::PARAM_STR);
+        $q->bindValue(':ti', $_SERVER['REQUEST_TIME'], PDO::PARAM_INT);
+        $q->execute();
+        $i = DB::get()->lastInsertId();
+        return $i.':'.$t;
     }
 
     public function checkRequestToken(string $t) : bool {
-        return password_verify($t, $this->requestToken);
+        $t = explode(':', $t);
+        $i = $t[0];
+        $t = $t[1];
+        $sql = 'SELECT * FROM users_request_tokens WHERE id = :i';
+        $q = DB::prepare($sql);
+        $q->bindValue(':i', $i, PDO::PARAM_INT);
+        $q->execute();
+        $q->bindColumn('userID', $uid,  PDO::PARAM_INT);
+        $q->bindColumn('token',  $hash, PDO::PARAM_STR);
+        $q->bindColumn('time',   $time, PDO::PARAM_INT);
+        $q->fetch(PDO::FETCH_BOUND);
+        if($uid != $this->id)
+            return false;
+        //TODO: check for time expiry
+        if(!password_verify($t, $hash))
+            return false;
+        //TODO: remove db entry now that the token has been used?
+        return true;
     }
 
     protected static function hashRequestToken(string $t) : string {
