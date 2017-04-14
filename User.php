@@ -213,19 +213,6 @@ class User {
     /*******************
      * CSRF Protection *
      *******************/
-    protected function setRequestToken(string $t) : void {
-        $opt = [
-            'cost' => Config::get('user', 'request_token_hash_cost'),
-        ];
-        $t = password_hash($t, PASSWORD_BCRYPT, $opt);
-        $sql = 'UPDATE users SET requestToken = :t WHERE id = :i';
-        $q = DB::prepare($sql);
-        $q->bindValue(':t', $t,        PDO::PARAM_STR);
-        $q->bindValue(':i', $this->id, PDO::PARAM_INT);
-        $q->execute();
-        $this->requestToken = $t;
-    }
-
     public function generateRequestToken() : string {
         //TODO: free token
         $t = random_bytes(Config::get('user', 'request_token_bytes'));
