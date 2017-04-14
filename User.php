@@ -214,7 +214,7 @@ class User {
      * CSRF Protection *
      *******************/
     public function generateRequestToken() : string {
-        //TODO: free token
+        $this->freeRequestToken();
         $t = random_bytes(Config::get('user', 'request_token_bytes'));
         $t = Base64::encode($t);
         $hash = self::hashRequestToken($t);
