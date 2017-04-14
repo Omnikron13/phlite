@@ -236,6 +236,13 @@ class User {
         return password_verify($t, $this->requestToken);
     }
 
+    protected static function hashRequestToken(string $t) : string {
+        $opt = [
+            'cost' => Config::get('user', 'request_token_hash_cost'),
+        ];
+        return password_hash($t, PASSWORD_BCRYPT, $opt);
+    }
+
     /*
      */
     public static function add(string $username, string $password, string $email) : self {
