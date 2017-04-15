@@ -219,24 +219,7 @@ class User {
     }
 
     public function checkRequestToken(string $t) : bool {
-        $t = explode(':', $t);
-        $i = $t[0];
-        $t = $t[1];
-        $sql = 'SELECT * FROM users_request_tokens WHERE id = :i';
-        $q = DB::prepare($sql);
-        $q->bindValue(':i', $i, PDO::PARAM_INT);
-        $q->execute();
-        $q->bindColumn('userID', $uid,  PDO::PARAM_INT);
-        $q->bindColumn('token',  $hash, PDO::PARAM_STR);
-        $q->bindColumn('time',   $time, PDO::PARAM_INT);
-        $q->fetch(PDO::FETCH_BOUND);
-        if($uid != $this->id)
-            return false;
-        //TODO: check for time expiry
-        if(!password_verify($t, $hash))
-            return false;
-        //TODO: remove db entry now that the token has been used?
-        return true;
+        return RequestToken::check($t, $this);
     }
 
     protected function freeRequestToken() : void {
