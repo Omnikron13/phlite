@@ -215,18 +215,7 @@ class User {
      * CSRF Protection *
      *******************/
     public function generateRequestToken() : string {
-        $this->freeRequestToken();
-        $t = random_bytes(Config::get('user', 'request_token_bytes'));
-        $t = Base64::encode($t);
-        $hash = self::hashRequestToken($t);
-        $sql = 'INSERT INTO users_request_tokens(userID, token, time) VALUES(:u, :to, :ti)';
-        $q = DB::prepare($sql);
-        $q->bindValue(':u',  $this->id,                PDO::PARAM_INT);
-        $q->bindValue(':to', $hash,                    PDO::PARAM_STR);
-        $q->bindValue(':ti', $_SERVER['REQUEST_TIME'], PDO::PARAM_INT);
-        $q->execute();
-        $i = DB::get()->lastInsertId();
-        return $i.':'.$t;
+        return RequestToken::generate($this);
     }
 
     public function checkRequestToken(string $t) : bool {
