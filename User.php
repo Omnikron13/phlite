@@ -222,25 +222,6 @@ class User {
         return RequestToken::check($t, $this);
     }
 
-    protected function freeRequestToken() : void {
-        $sql = 'SELECT COUNT(*) FROM users_request_tokens WHERE userID = :u';
-        $q = DB::prepare($sql);
-        $q->bindValue(':u', $this->id, PDO::PARAM_INT);
-        $q->execute();
-        $c = $q->fetchColumn();
-        if($c < Config::get('user', 'request_token_max'))
-            return;
-        $sql = 'SELECT id FROM users_request_tokens WHERE userID = :u ORDER BY time ASC LIMIT 1';
-        $q = DB::prepare($sql);
-        $q->bindValue(':u', $this->id, PDO::PARAM_INT);
-        $q->execute();
-        $i = $q->fetchColumn();
-        $sql = 'DELETE FROM users_request_tokens WHERE id = :i';
-        $q = DB::prepare($sql);
-        $q->bindValue(':i', $i, PDO::PARAM_INT);
-        $q->execute();
-    }
-
     /*
      */
     public static function add(string $username, string $password, string $email) : self {
