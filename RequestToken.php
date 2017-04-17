@@ -26,6 +26,13 @@ class RequestToken {
         //TODO: throw on fail
     }
 
+    public function remove() : void {
+        $sql = 'DELETE FROM users_request_tokens WHERE id = :i';
+        $q = DB::prepare($sql);
+        $q->bindValue(':i', $this->id, PDO::PARAM_INT);
+        $q->execute();
+    }
+
     public static function check(string $t, User $u) : bool {
         $t = explode(':', $t);
         $rt = new self($t[0]);
