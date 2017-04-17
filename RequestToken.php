@@ -38,7 +38,10 @@ class RequestToken {
         $rt = new self($t[0]);
         if($rt->userID != $u->getID())
             return false;
-        //TODO: check for time expiry
+        if($_SERVER['REQUEST_TIME'] > $rt->time + Config::get('request_token', 'ttl')) {
+            $rt->remove();
+            return false;
+        }
         if(!password_verify($t[1], $rt->token))
             return false;
         $rt->remove();
