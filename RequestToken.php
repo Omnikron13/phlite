@@ -36,7 +36,7 @@ class RequestToken {
     public static function check(string $t, User $u) : bool {
         $t = explode(':', $t);
         $rt = new self($t[0]);
-        if($rt->id != $u->getID())
+        if($rt->userID != $u->getID())
             return false;
         //TODO: check for time expiry
         if(!password_verify($t[1], $rt->token))
