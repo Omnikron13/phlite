@@ -41,7 +41,7 @@ class RequestToken {
         //TODO: check for time expiry
         if(!password_verify($t[1], $rt->token))
             return false;
-        //TODO: remove db entry now that the token has been used?
+        $rt->remove();
         return true;
     }
 
