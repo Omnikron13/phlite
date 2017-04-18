@@ -184,6 +184,13 @@ class User {
         ];
     }
 
+    public static function logout() : void {
+        $s = Session::getCurrent();
+        if($s === NULL)
+            return;
+        $s->end();
+    }
+
     protected function logLogin(bool $success) : void {
         $sql = 'INSERT INTO users_logins(userID, success, time, IP) VALUES(:u, :s, :t, :i)';
         $q = DB::prepare($sql);
