@@ -42,7 +42,10 @@ class Session {
             $k = $_COOKIE['sessionKey'];
         if($_SERVER['REMOTE_ADDR'] != $this->IP)
             return false;
-        return password_verify($k, $this->key);
+        if(!password_verify($k, $this->key))
+            return false;
+        $this->touch();
+        return true;
     }
 
     public function touch() : void {
