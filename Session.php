@@ -7,6 +7,7 @@ require_once 'Config.php';
 require_once 'DB.php';
 require_once 'User.php';
 require_once 'Base64.php';
+require_once 'Cookie.php';
 
 class Session {
     protected $id     = NULL;
