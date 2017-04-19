@@ -87,8 +87,8 @@ class Session {
         $q->bindValue(':a', $_SERVER['REQUEST_TIME'], PDO::PARAM_INT);
         $q->execute();
         $s = new self(DB::get()->lastInsertId());
-        self::sendCookie('sessionID',  $s->getID());
-        self::sendCookie('sessionKey', $key);
+        Cookie::send('sessionID',  $s->getID());
+        Cookie::send('sessionKey', $key);
         return $s;
     }
 
