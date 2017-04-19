@@ -63,8 +63,8 @@ class Session {
         $q = DB::prepare($sql);
         $q->bindValue(':i', $this->id, PDO::PARAM_INT);
         $q->execute();
-        self::clearCookie('sessionID');
-        self::clearCookie('sessionKey');
+        Cookie::clear('sessionID');
+        Cookie::clear('sessionKey');
     }
 
     public static function getCurrent() : ?self {
