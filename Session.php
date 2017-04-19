@@ -125,25 +125,6 @@ class Session {
         ];
         return password_hash($k, PASSWORD_BCRYPT, $opt);
     }
-
-    protected static function sendCookie(string $k, ?string $v, int $d = 0) : void {
-        if($d > 0)
-            $d += $_SERVER['REQUEST_TIME'];
-        setcookie(
-            $k,
-            $v,
-            $d,     //duration
-            NULL,   //path
-            NULL,   //domain
-            false,  //secure (https only)
-            true    //HttpOnly - hidden from js
-        );
-        $_COOKIE[$k] = $v;
-    }
-
-    protected static function clearCookie(string $k) : void {
-        self::sendCookie($k, NULL, -1);
-    }
 }
 
 ?>
