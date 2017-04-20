@@ -8,9 +8,9 @@ class Cookie {
         if($d > 0)
             $d += $_SERVER['REQUEST_TIME'];
         setcookie(
-            $k,
-            $v,
-            $d,     //duration
+            $k, //key
+            $v, //value
+            $d, //duration
             Config::get('cookie', 'path'),
             Config::get('cookie', 'domain'),
             Config::get('cookie', 'secure'),
