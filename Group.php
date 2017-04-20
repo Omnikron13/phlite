@@ -22,6 +22,16 @@ class Group {
         //TODO: throw on failure
     }
 
+    public function getID() : int {
+        return $this->id;
+    }
+    public function getName() : string {
+        return $this->name;
+    }
+    public function getDescription() : string {
+        return $this->description;
+    }
+
     public static function add(string $n, ?string $d = NULL) : self {
         //TODO: validation
         $sql = 'INSERT INTO groups(name, description) VALUES(:n, :d)';
