@@ -42,6 +42,16 @@ class Group {
         $this->name = $n;
     }
 
+    public function setDescription(string $d) : void {
+        //TODO: validate
+        $sql = 'UPDATE groups SET description = :d WHERE id = :i';
+        $q = DB::prepare($sql);
+        $q->bindValue(':i', $this->id, PDO::PARAM_INT);
+        $q->bindValue(':d', $d,        PDO::PARAM_STR);
+        $q->execute();
+        $this->description = $d;
+    }
+
     public static function add(string $n, ?string $d = NULL) : self {
         //TODO: validation
         $sql = 'INSERT INTO groups(name, description) VALUES(:n, :d)';
