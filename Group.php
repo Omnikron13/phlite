@@ -13,7 +13,7 @@ class Group {
     public function __construct(int $id) {
         $sql = 'SELECT * FROM groups WHERE id = :i';
         $q = DB::prepare($sql);
-        $q->bindValue(':i', $i, PDO::PARAM_INT);
+        $q->bindValue(':i', $id, PDO::PARAM_INT);
         $q->execute();
         $q->bindColumn('id',          $this->id,          PDO::PARAM_INT);
         $q->bindColumn('name',        $this->name,        PDO::PARAM_STR);
