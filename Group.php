@@ -52,6 +52,13 @@ class Group {
         $this->description = $d;
     }
 
+    public function remove() : void {
+        $sql = 'DELETE FROM groups WHERE id = :i';
+        $q = DB::prepare($sql);
+        $q->bindValue(':i', $this->id, PDO::PARAM_INT);
+        $q->execute();
+    }
+
     public static function add(string $n, ?string $d = NULL) : self {
         //TODO: validation
         $sql = 'INSERT INTO groups(name, description) VALUES(:n, :d)';
