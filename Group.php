@@ -51,6 +51,10 @@ class Group {
         $q->execute();
         return new self(DB::get()->lastInsertId());
     }
+
+    public static function setupDB() : void {
+        DB::execFile('sql/groups.sql');
+    }
 }
 
 ?>
