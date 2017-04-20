@@ -4,7 +4,9 @@ namespace PHlite;
 require_once 'Config.php';
 
 class Cookie {
-    public static function send(string $k, ?string $v, int $d = 0) : void {
+    public static function send(string $k, ?string $v, ?int $d = NULL) : void {
+        if($d === NULL)
+            $d = Config::get('cookie', 'default_ttl');
         if($d > 0)
             $d += $_SERVER['REQUEST_TIME'];
         setcookie(
