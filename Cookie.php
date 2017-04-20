@@ -11,10 +11,10 @@ class Cookie {
             $k,
             $v,
             $d,     //duration
-            NULL,   //path
-            NULL,   //domain
-            false,  //secure (https only)
-            true    //HttpOnly - hidden from js
+            Config::get('cookie', 'path'),
+            Config::get('cookie', 'domain'),
+            Config::get('cookie', 'secure'),
+            Config::get('cookie', 'http_only')
         );
         $_COOKIE[$k] = $v;
     }
