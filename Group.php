@@ -65,6 +65,21 @@ class Group {
         $q->execute();
     }
 
+    public function getMembers() : array {
+        $sql = 'SELECT userID FROM groups_members WHERE groupID = :i';
+        $q = DB::prepare($sql);
+        $q->bindValue(':i', $this->id, PDO::PARAM_INT);
+        $q->execute();
+        $m = $q->fetchAll(PDO::FETCH_COLUMN, 0);
+        $m = array_map(
+            function(int $i) {
+                return new User($i);
+            },
+            $m
+        );
+        return $m;
+    }
+
     public function remove() : void {
         $sql = 'DELETE FROM groups WHERE id = :i';
         $q = DB::prepare($sql);
