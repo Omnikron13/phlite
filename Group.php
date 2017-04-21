@@ -80,6 +80,9 @@ class Group {
         return $m;
     }
 
+    /********************
+     * Group management *
+     ********************/
     public function remove() : void {
         $sql = 'DELETE FROM groups WHERE id = :i';
         $q = DB::prepare($sql);
