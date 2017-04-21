@@ -53,6 +53,15 @@ class Group {
         $this->description = $d;
     }
 
+    public function addMember(User $u) : void {
+        //TODO: avoid constraint violation
+        $sql = 'INSERT INTO groups_members(groupID, userID) VALUES(:g, :u)';
+        $q = DB::prepare($sql);
+        $q->bindValue(':g', $this->id,   PDO::PARAM_INT);
+        $q->bindValue(':u', $u->getID(), PDO::PARAM_INT);
+        $q->execute();
+    }
+
     public function remove() : void {
         $sql = 'DELETE FROM groups WHERE id = :i';
         $q = DB::prepare($sql);
