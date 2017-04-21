@@ -53,6 +53,9 @@ class Group {
         $this->description = $d;
     }
 
+    /*********************
+     * Member management *
+     *********************/
     public function addMember(User $u) : void {
         //TODO: avoid constraint violation
         $sql = 'INSERT INTO groups_members(groupID, userID) VALUES(:g, :u)';
