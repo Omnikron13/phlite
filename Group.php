@@ -4,6 +4,7 @@ namespace PHlite;
 use PDO;
 
 require_once 'DB.php';
+require_once 'User.php';
 
 class Group {
     protected $id          = NULL;
