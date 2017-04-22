@@ -120,6 +120,7 @@ class Group {
     }
 
     public static function setupDB() : void {
+        User::setupDB();
         DB::execFile('sql/groups.sql');
         DB::execFile('sql/groups_members.sql');
     }
