@@ -91,6 +91,14 @@ class Group {
         return $q->fetchColumn() > 0;
     }
 
+    public function removeMember(User $u) : void {
+        $sql = 'DELETE FROM groups_members WHERE groupID = :g AND userID = :u';
+        $q = DB::prepare($sql);
+        $q->bindValue(':g', $this->id,   PDO::PARAM_INT);
+        $q->bindValue(':u', $u->getID(), PDO::PARAM_INT);
+        $q->execute();
+    }
+
     /********************
      * Group management *
      ********************/
