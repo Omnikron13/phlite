@@ -72,6 +72,10 @@ class Lock {
         return new self(DB::get()->lastInsertId());
     }
 
+    /******************
+     * Key management *
+     ******************/
+
     /************
      * Database *
      ************/
