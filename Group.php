@@ -119,6 +119,21 @@ class Group {
         return new self(DB::get()->lastInsertId());
     }
 
+    public static function getUserGroups(User $u) : array {
+        $sql = 'SELECT groupID FROM groups_members WHERE userID = :u';
+        $q = DB::prepare($sql);
+        $q->bindValue(':u', $u->getID(), PDO::PARAM_INT);
+        $q->execute();
+        $g = $q->fetchAll(PDO::FETCH_COLUMN, 0);
+        $g = array_map(
+            function(int $i) {
+                return new Group($i);
+            },
+            $g
+        );
+        return $g;
+    }
+
     public static function setupDB() : void {
         User::setupDB();
         DB::execFile('sql/groups.sql');
