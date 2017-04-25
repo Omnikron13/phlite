@@ -103,6 +103,33 @@ class Lock {
         $q->execute();
     }
 
+    public function grantUserKey(User $u) : void {
+        if($this->checkUserKey($u))
+            return;
+        $sql = 'INSERT INTO locks_user_keys(lockID, userID) VALUES(:l, :u)';
+        $q = DB::prepare($sql);
+        $q->bindValue(':l', $this->id,   PDO::PARAM_INT);
+        $q->bindValue(':u', $u->getID(), PDO::PARAM_INT);
+        $q->execute();
+    }
+
+    public function checkUserKey(User $u) : bool {
+        $sql = 'SELECT COUNT(*) FROM locks_user_keys WHERE lockID = :l AND userID = :u';
+        $q = DB::prepare($sql);
+        $q->bindValue(':l', $this->id,   PDO::PARAM_INT);
+        $q->bindValue(':u', $u->getID(), PDO::PARAM_INT);
+        $q->execute();
+        return $q->fetchColumn() > 0;
+    }
+
+    public function revokeUserKey(User $u) : void {
+        $sql = 'DELETE FROM locks_user_keys WHERE lockID = :l AND userID = :u';
+        $q = DB::prepare($sql);
+        $q->bindValue(':l', $this->id,   PDO::PARAM_INT);
+        $q->bindValue(':u', $u->getID(), PDO::PARAM_INT);
+        $q->execute();
+    }
+
     /************
      * Database *
      ************/
