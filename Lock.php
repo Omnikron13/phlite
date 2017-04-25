@@ -110,6 +110,7 @@ class Lock {
         Group::setupDB();
         DB::execFile('sql/locks.sql');
         DB::execFile('sql/locks_group_keys.sql');
+        DB::execFile('sql/locks_user_keys.sql');
     }
 }
 
