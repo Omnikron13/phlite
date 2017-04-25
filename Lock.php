@@ -5,6 +5,7 @@ use PDO;
 
 require_once 'DB.php';
 require_once 'Group.php';
+require_once 'User.php';
 
 class Lock {
     protected $id         = NULL;
