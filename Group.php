@@ -148,6 +148,9 @@ class Group {
         return $g;
     }
 
+    /************
+     * Database *
+     ************/
     public static function setupDB() : void {
         User::setupDB();
         DB::execFile('sql/groups.sql');
