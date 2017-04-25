@@ -23,6 +23,10 @@ class Group {
         //TODO: throw on failure
     }
 
+    public function __toString() : string {
+        return $this->name;
+    }
+
     public function getID() : int {
         return $this->id;
     }
