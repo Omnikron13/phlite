@@ -94,6 +94,14 @@ class Lock {
         return $q->fetchColumn() > 0;
     }
 
+    public function revokeGroupKey(Group $g) : void {
+        $sql = 'DELETE FROM locks_group_keys WHERE lockID = :l AND groupID = :g';
+        $q = DB::prepare($sql);
+        $q->bindValue(':l', $this->id,   PDO::PARAM_INT);
+        $q->bindValue(':g', $g->getID(), PDO::PARAM_INT);
+        $q->execute();
+    }
+
     /************
      * Database *
      ************/
