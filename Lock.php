@@ -82,6 +82,7 @@ class Lock {
     public static function setupDB() : void {
         Group::setupDB();
         DB::execFile('sql/locks.sql');
+        DB::execFile('sql/locks_group_keys.sql');
     }
 }
 
