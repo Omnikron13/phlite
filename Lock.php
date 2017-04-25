@@ -84,6 +84,15 @@ class Lock {
         $q->execute();
     }
 
+    public function checkGroupKey(Group $g) : bool {
+        $sql = 'SELECT COUNT(*) FROM locks_group_keys WHERE lockID = :l AND groupID = :g';
+        $q = DB::prepare($sql);
+        $q->bindValue(':l', $this->id,   PDO::PARAM_INT);
+        $q->bindValue(':g', $g->getID(), PDO::PARAM_INT);
+        $q->execute();
+        return $q->fetchColumn() > 0;
+    }
+
     /************
      * Database *
      ************/
