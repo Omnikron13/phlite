@@ -227,8 +227,9 @@ class User {
         return RequestToken::check($t, $this);
     }
 
-    /*
-     */
+    /*******************
+     * User management *
+     *******************/
     public static function add(string $username, string $password, string $email) : self {
         //TODO: verify
         $password = self::hashPassword($password);
