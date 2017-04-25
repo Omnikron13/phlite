@@ -264,6 +264,9 @@ class User {
         return $u;
     }
 
+    /************
+     * Database *
+     ************/
     public static function setupDB() : void {
         DB::execFile('sql/users.sql');
         DB::execFile('sql/users_verify.sql');
