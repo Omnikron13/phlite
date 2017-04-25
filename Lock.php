@@ -73,6 +73,20 @@ class Lock {
         return new self(DB::get()->lastInsertId());
     }
 
+    public static function getAll() : array {
+        $sql = 'SELECT id FROM locks';
+        $q = DB::prepare($sql);
+        $q->execute();
+        $l = $q->fetchAll(PDO::FETCH_COLUMN, 0);
+        $l = array_map(
+            function(int $i) {
+                return new Lock($i);
+            },
+            $l
+        );
+        return $l;
+    }
+
     /******************
      * Key management *
      ******************/
