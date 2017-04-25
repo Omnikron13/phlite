@@ -250,6 +250,20 @@ class User {
         return $s->getUser();
     }
 
+    public static function getAll() : array {
+        $sql = 'SELECT id FROM users';
+        $q = DB::prepare($sql);
+        $q->execute();
+        $g = $q->fetchAll(PDO::FETCH_COLUMN, 0);
+        $u = array_map(
+            function(int $i) {
+                return new User($i);
+            },
+            $u
+        );
+        return $u;
+    }
+
     public static function setupDB() : void {
         DB::execFile('sql/users.sql');
         DB::execFile('sql/users_verify.sql');
