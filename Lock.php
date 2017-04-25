@@ -113,13 +113,21 @@ class Lock {
         $q->execute();
     }
 
-    public function checkUserKey(User $u) : bool {
+    public function checkUserKey(User $u, bool $checkGroups = true) : bool {
         $sql = 'SELECT COUNT(*) FROM locks_user_keys WHERE lockID = :l AND userID = :u';
         $q = DB::prepare($sql);
         $q->bindValue(':l', $this->id,   PDO::PARAM_INT);
         $q->bindValue(':u', $u->getID(), PDO::PARAM_INT);
         $q->execute();
-        return $q->fetchColumn() > 0;
+        if($q->fetchColumn() > 0)
+            return true;
+        if(!$checkGroups)
+            return false;
+        foreach(Group::getUserGroups($u) as $g) {
+            if($this->checkGroupKey($g))
+                return true;
+        }
+        return false;
     }
 
     public function revokeUserKey(User $u) : void {
