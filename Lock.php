@@ -75,6 +75,14 @@ class Lock {
     /******************
      * Key management *
      ******************/
+    public function grantGroupKey(Group $g) : void {
+        //TODO: avoid constraint violation
+        $sql = 'INSERT INTO locks_group_keys(lockID, groupID) VALUES(:l, :g)';
+        $q = DB::prepare($sql);
+        $q->bindValue(':l', $this->id,   PDO::PARAM_INT);
+        $q->bindValue(':g', $g->getID(), PDO::PARAM_INT);
+        $q->execute();
+    }
 
     /************
      * Database *
