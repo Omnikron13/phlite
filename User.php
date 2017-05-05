@@ -62,24 +62,11 @@ class User {
     public function getID() : int {
         return $this->id;
     }
-    public function getUsername() : string {
-        return $this->username;
-    }
     public function getEmail() : string {
         return $this->email;
     }
     public function getRegisterTime() : int {
         return $this->registerTime;
-    }
-
-    public function setUsername(string $u) : void {
-        //TODO: validate
-        $sql = 'UPDATE users SET username = :u WHERE id = :i';
-        $q = DB::prepare($sql);
-        $q->bindValue(':u', $u, PDO::PARAM_STR);
-        $q->bindValue(':i', $i, PDO::PARAM_INT);
-        $q->execute();
-        $this->username = $u;
     }
 
     public function setEmail(string $e) : void {
@@ -90,6 +77,23 @@ class User {
         $q->bindValue(':i', $i, PDO::PARAM_INT);
         $q->execute();
         $this->email = $e;
+    }
+
+    /*************
+     * Usernames *
+     *************/
+    public function getUsername() : string {
+        return $this->username;
+    }
+
+    public function setUsername(string $u) : void {
+        //TODO: validate
+        $sql = 'UPDATE users SET username = :u WHERE id = :i';
+        $q = DB::prepare($sql);
+        $q->bindValue(':u', $u, PDO::PARAM_STR);
+        $q->bindValue(':i', $i, PDO::PARAM_INT);
+        $q->execute();
+        $this->username = $u;
     }
 
     /*************
