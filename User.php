@@ -96,6 +96,11 @@ class User {
         $this->username = $u;
     }
 
+    public static function validUsername(string $u) : bool {
+        $r = Config::get('user', 'username_regex');
+        return preg_match($r, $u);
+    }
+
     /*************
      * Passwords *
      *************/
