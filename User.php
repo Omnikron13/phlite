@@ -101,6 +101,14 @@ class User {
         return preg_match($r, $u);
     }
 
+    public static function availableUsername(string $u) : bool {
+        $sql = 'SELECT COUNT(*) FROM users WHERE username = :u';
+        $q = DB::prepare($sql);
+        $q->bindValue(':u', $u, PDO::PARAM_STR);
+        $q->execute();
+        return $q->fetchColumn() == 0;
+    }
+
     /*************
      * Passwords *
      *************/
