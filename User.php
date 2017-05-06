@@ -155,7 +155,7 @@ class User {
             $u = new self($username, self::GET_BY_USERNAME);
         }
         //TODO: more specific exception (see constructor)
-        catch(\Exception $e) {
+        catch(PhliteException $e) {
             return [
                 'success' => false,
                 'code'    => self::LOGIN_ERROR['NO_SUCH_USER'],
