@@ -7,6 +7,7 @@ require_once 'DB.php';
 require_once 'Base64.php';
 require_once 'Session.php';
 require_once 'RequestToken.php';
+require_once 'PhliteException.php';
 
 class User {
     //Flags
