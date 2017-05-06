@@ -53,7 +53,7 @@ class User {
         $q->fetch(PDO::FETCH_BOUND);
         //TODO: throw better exception
         if($this->id === NULL)
-            throw new \Exception('User not found');
+            throw new PhliteException('User not found');
     }
 
     public function __toString() : string {
