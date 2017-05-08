@@ -282,6 +282,16 @@ class User {
         return $u;
     }
 
+    public static function getByID(int $i) : ?self {
+        try{
+            $u = new self($i);
+        }
+        catch(PhliteException $e) {
+            return NULL;
+        }
+        return $u;
+    }
+
     public static function getByUsername(string $u) : ?self {
         $sql = 'SELECT id FROM users WHERE username = :u';
         $q = DB::prepare($sql);
