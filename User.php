@@ -10,10 +10,6 @@ require_once 'RequestToken.php';
 require_once 'PhliteException.php';
 
 class User {
-    //Flags
-    public const GET_BY_ID       = 0;
-    public const GET_BY_USERNAME = 1;
-
     public const LOGIN_ERROR = [
         'NO_USERNAME'        => 1,
         'NO_PASSWORD'        => 2,
