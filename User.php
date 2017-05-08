@@ -73,7 +73,11 @@ class User {
     }
 
     public function setUsername(string $u) : void {
-        //TODO: validate
+        //TODO: specific exceptions
+        if(!self::validUsername($u))
+            throw new PhliteException('Invalid username');
+        if(!self::availableUsername($u))
+            throw new PhliteException('Unavailable username');
         $sql = 'UPDATE users SET username = :u WHERE id = :i';
         $q = DB::prepare($sql);
         $q->bindValue(':u', $u, PDO::PARAM_STR);
