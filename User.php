@@ -29,21 +29,10 @@ class User {
     protected $email        = NULL;
     protected $registerTime = NULL;
 
-    public function __construct($uid, int $mode = self::GET_BY_ID) {
-        switch($mode) {
-            case self::GET_BY_ID:
-                $sql = 'SELECT * FROM users WHERE id = :i';
-                $q = DB::prepare($sql);
-                $q->bindValue(':i', $uid, PDO::PARAM_INT);
-                break;
-            case self::GET_BY_USERNAME:
-                $sql = 'SELECT * FROM users WHERE username = :u';
-                $q = DB::prepare($sql);
-                $q->bindValue(':u', $uid, PDO::PARAM_STR);
-                break;
-            default:
-                //TODO: throw
-        }
+    public function __construct(int $id) {
+        $sql = 'SELECT * FROM users WHERE id = :i';
+        $q = DB::prepare($sql);
+        $q->bindValue(':i', $id, PDO::PARAM_INT);
         $q->execute();
         $q->bindColumn('id',           $this->id,           PDO::PARAM_INT);
         $q->bindColumn('username',     $this->username,     PDO::PARAM_STR);
