@@ -258,7 +258,7 @@ class User {
         $query->bindValue(':e', $email,    PDO::PARAM_STR);
         $query->bindValue(':t', time(),    PDO::PARAM_INT);
         $query->execute();
-        return new self($username, self::GET_BY_USERNAME);
+        return self::getByUsername($username);
     }
 
     public static function getCurrent() : ?self {
