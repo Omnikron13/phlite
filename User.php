@@ -282,6 +282,17 @@ class User {
         return $u;
     }
 
+    public static function getByUsername(string $u) : ?self {
+        $sql = 'SELECT id FROM users WHERE username = :u';
+        $q = DB::prepare($sql);
+        $q->bindValue(':u', $u, PDO::PARAM_STR);
+        $q->execute();
+        $i = $q->fetchColumn();
+        if($i === false)
+            return NULL;
+        return new self($i);
+    }
+
     /************
      * Database *
      ************/
