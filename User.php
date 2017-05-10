@@ -121,7 +121,8 @@ class User {
      * Passwords *
      *************/
     public function setPassword(string $p) : void {
-        //TODO: validate
+        if(!self::validPassword($p))
+            throw new UserException(UserException::CODE['PASSWORD_INVALID']);
         $p = self::hashPassword($p);
         $sql = 'UPDATE users SET password = :p WHERE id = :i';
         $q = DB::prepare($sql);
