@@ -6,12 +6,12 @@ require_once 'PhliteException.php';
 class UserException extends PhliteException {
     public const CODE_PREFIX = 100;
     public const CODE = [
-        'USER_NOT_FOUND'       => 1,
-        'USERNAME_INVALID'     => 2,
-        'USERNAME_UNAVAILABLE' => 3,
-        'EMAIL_INVALID'        => 4,
-        'EMAIL_UNAVAILABLE'    => 5,
-        'PASSWORD_INVALID'     => 6,
+        'USER_NOT_FOUND'       => self::CODE_PREFIX + 1,
+        'USERNAME_INVALID'     => self::CODE_PREFIX + 2,
+        'USERNAME_UNAVAILABLE' => self::CODE_PREFIX + 3,
+        'EMAIL_INVALID'        => self::CODE_PREFIX + 4,
+        'EMAIL_UNAVAILABLE'    => self::CODE_PREFIX + 5,
+        'PASSWORD_INVALID'     => self::CODE_PREFIX + 6,
     ];
     protected const MESSAGE = [
         self::CODE['USER_NOT_FOUND']       => 'User not found',
@@ -23,7 +23,7 @@ class UserException extends PhliteException {
     ];
 
     public function __construct(int $code) {
-        parent::__construct(null, $code + self::CODE_PREFIX);
+        parent::__construct(null, $code);
     }
 }
 
