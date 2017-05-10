@@ -55,6 +55,14 @@ class Group {
         return preg_match($r, $n);
     }
 
+    public static function availableName(string $n) : bool {
+        $sql = 'SELECT COUNT(*) FROM groups WHERE name = :n';
+        $q = DB::prepare($sql);
+        $q->bindValue(':n', $n, PDO::PARAM_STR);
+        $q->execute();
+        return $q->fetchColumn() == 0;
+    }
+
     /***************
      * Description *
      ***************/
