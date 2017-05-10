@@ -117,6 +117,11 @@ class User {
         return password_verify($p, $this->password);
     }
 
+    public static function validPassword(string $p) : bool {
+        $r = Config::get('user', 'password_regex');
+        return preg_match($r, $p);
+    }
+
     protected static function hashPassword(string $p) : string {
         $options = [
             'cost' => Config::get('user', 'password_hash_cost'),
