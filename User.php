@@ -48,21 +48,8 @@ class User {
     public function getID() : int {
         return $this->id;
     }
-    public function getEmail() : string {
-        return $this->email;
-    }
     public function getRegisterTime() : int {
         return $this->registerTime;
-    }
-
-    public function setEmail(string $e) : void {
-        //TODO: validate
-        $sql = 'UPDATE users SET email = :e WHERE id = :i';
-        $q = DB::prepare($sql);
-        $q->bindValue(':e', $e, PDO::PARAM_STR);
-        $q->bindValue(':i', $i, PDO::PARAM_INT);
-        $q->execute();
-        $this->email = $e;
     }
 
     /*************
@@ -97,6 +84,23 @@ class User {
         $q->bindValue(':u', $u, PDO::PARAM_STR);
         $q->execute();
         return $q->fetchColumn() == 0;
+    }
+
+    /**********
+     * Emails *
+     **********/
+    public function getEmail() : string {
+        return $this->email;
+    }
+
+    public function setEmail(string $e) : void {
+        //TODO: validate
+        $sql = 'UPDATE users SET email = :e WHERE id = :i';
+        $q = DB::prepare($sql);
+        $q->bindValue(':e', $e, PDO::PARAM_STR);
+        $q->bindValue(':i', $i, PDO::PARAM_INT);
+        $q->execute();
+        $this->email = $e;
     }
 
     /*************
