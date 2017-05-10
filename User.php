@@ -305,7 +305,7 @@ class User {
         try{
             $u = new self($i);
         }
-        catch(PhliteException $e) {
+        catch(UserException $e) {
             return NULL;
         }
         return $u;
