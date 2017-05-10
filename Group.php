@@ -41,7 +41,10 @@ class Group {
     }
 
     public function setName(string $n) : void {
-        //TODO: validate
+        if(!self::validName($n))
+            throw new GroupException(GroupException::CODE['NAME_INVALID']);
+        if(!self::availableName($n))
+            throw new GroupException(GroupException::CODE['NAME_UNAVAILABLE']);
         $sql = 'UPDATE groups SET name = :n WHERE id = :i';
         $q = DB::prepare($sql);
         $q->bindValue(':i', $this->id, PDO::PARAM_INT);
