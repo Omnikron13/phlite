@@ -11,6 +11,10 @@ class UserException extends PhliteException {
         'EMAIL_UNAVAILABLE'    => 5,
         'PASSWORD_INVALID'     => 6,
     ];
+
+    public function __construct(int $code) {
+        parent::__construct(null, $code + self::CODE_PREFIX);
+    }
 }
 
 ?>
