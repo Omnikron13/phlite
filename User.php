@@ -103,6 +103,19 @@ class User {
         $this->email = $e;
     }
 
+    public static function validEmail(string $e) : bool {
+        $r = Config::get('user', 'email_regex');
+        return preg_match($r, $e);
+    }
+
+    public static function availableEmail(string $e) : bool {
+        $sql = 'SELECT COUNT(*) FROM users WHERE email = :e';
+        $q = DB::prepare($sql);
+        $q->bindValue(':e', $e, PDO::PARAM_STR);
+        $q->execute();
+        return $q->fetchColumn() == 0;
+    }
+
     /*************
      * Passwords *
      *************/
