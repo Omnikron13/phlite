@@ -2,6 +2,7 @@
 namespace Phlite;
 
 class UserException extends PhliteException {
+    public const CODE_PREFIX = 100;
     public const CODE = [
         'USER_NOT_FOUND'       => 1,
         'USERNAME_INVALID'     => 2,
