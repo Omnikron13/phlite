@@ -92,7 +92,10 @@ class User {
     }
 
     public function setEmail(string $e) : void {
-        //TODO: validate
+        if(!self::validEmail($e))
+            throw new UserException(UserException::CODE['EMAIL_INVALID']);
+        if(!self::availableEmail($e))
+            throw new UserException(UserException::CODE['EMAIL_UNAVAILABLE']);
         $sql = 'UPDATE users SET email = :e WHERE id = :i';
         $q = DB::prepare($sql);
         $q->bindValue(':e', $e, PDO::PARAM_STR);
