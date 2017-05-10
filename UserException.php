@@ -23,7 +23,7 @@ class UserException extends PhliteException {
     ];
 
     public function __construct(int $code) {
-        parent::__construct(null, $code);
+        parent::__construct("$code ".self::MESSAGE[$code], $code);
     }
 }
 
