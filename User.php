@@ -36,9 +36,8 @@ class User {
         $q->bindColumn('email',        $this->email,        PDO::PARAM_STR);
         $q->bindColumn('registerTime', $this->registerTime, PDO::PARAM_INT);
         $q->fetch(PDO::FETCH_BOUND);
-        //TODO: throw better exception
         if($this->id === NULL)
-            throw new PhliteException('User not found');
+            throw new UserException(UserException::CODE['USER_NOT_FOUND']);
     }
 
     public function __toString() : string {
