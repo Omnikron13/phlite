@@ -1,6 +1,8 @@
 <?php
 namespace Phlite;
 
+require_once 'PhliteException.php';
+
 class UserException extends PhliteException {
     public const CODE_PREFIX = 100;
     public const CODE = [
