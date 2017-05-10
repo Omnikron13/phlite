@@ -322,6 +322,17 @@ class User {
         return new self($i);
     }
 
+    public static function getByEmail(string $e) : ?self {
+        $sql = 'SELECT id FROM users WHERE email = :e';
+        $q = DB::prepare($sql);
+        $q->bindValue(':e', $e, PDO::PARAM_STR);
+        $q->execute();
+        $i = $q->fetchColumn();
+        if($i === false)
+            return NULL;
+        return new self($i);
+    }
+
     /************
      * Database *
      ************/
