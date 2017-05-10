@@ -259,7 +259,16 @@ class User {
      * User management *
      *******************/
     public static function add(string $username, string $password, string $email) : self {
-        //TODO: verify
+        if(!self::validUsername($username))
+            throw new UserException(UserException::CODE['USERNAME_INVALID']);
+        if(!self::availableUsername($username))
+            throw new UserException(UserException::CODE['USERNAME_UNAVAILABLE']);
+        if(!self::validEmail($email))
+            throw new UserException(UserException::CODE['EMAIL_INVALID']);
+        if(!self::availableEmail($email))
+            throw new UserException(UserException::CODE['EMAIL_UNAVAILABLE']);
+        if(!self::validPassword($password))
+            throw new UserException(UserException::CODE['PASSWORD_INVALID']);
         $password = self::hashPassword($password);
         $sql = 'INSERT INTO users(username, password, email, registerTime) VALUES(:u, :p, :e, :t)';
         $query = DB::prepare($sql);
