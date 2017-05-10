@@ -5,6 +5,7 @@ use PDO;
 
 require_once 'DB.php';
 require_once 'User.php';
+require_once 'GroupException.php';
 
 class Group {
     protected $id          = NULL;
