@@ -30,21 +30,8 @@ class Group {
     public function getID() : int {
         return $this->id;
     }
-    public function getName() : string {
-        return $this->name;
-    }
     public function getDescription() : string {
         return $this->description;
-    }
-
-    public function setName(string $n) : void {
-        //TODO: validate
-        $sql = 'UPDATE groups SET name = :n WHERE id = :i';
-        $q = DB::prepare($sql);
-        $q->bindValue(':i', $this->id, PDO::PARAM_INT);
-        $q->bindValue(':n', $n,        PDO::PARAM_STR);
-        $q->execute();
-        $this->name = $n;
     }
 
     public function setDescription(string $d) : void {
@@ -55,6 +42,23 @@ class Group {
         $q->bindValue(':d', $d,        PDO::PARAM_STR);
         $q->execute();
         $this->description = $d;
+    }
+
+    /********
+     * Name *
+     ********/
+    public function getName() : string {
+        return $this->name;
+    }
+
+    public function setName(string $n) : void {
+        //TODO: validate
+        $sql = 'UPDATE groups SET name = :n WHERE id = :i';
+        $q = DB::prepare($sql);
+        $q->bindValue(':i', $this->id, PDO::PARAM_INT);
+        $q->bindValue(':n', $n,        PDO::PARAM_STR);
+        $q->execute();
+        $this->name = $n;
     }
 
     /*********************
