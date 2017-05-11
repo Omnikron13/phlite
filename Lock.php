@@ -34,6 +34,9 @@ class Lock {
         return $this->description;
     }
 
+    /********
+     * Name *
+     ********/
     public function setName(string $n) : void {
         //TODO: validate
         $sql = 'UPDATE locks SET name = :n WHERE id = :i';
