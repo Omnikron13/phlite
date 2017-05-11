@@ -146,7 +146,12 @@ class Group {
     }
 
     public static function add(string $n, ?string $d = NULL) : self {
-        //TODO: validation
+        if(!self::validName($n))
+            throw new GroupException(GroupException::CODE['NAME_INVALID']);
+        if(!self::availableName($n))
+            throw new GroupException(GroupException::CODE['NAME_UNAVAILABLE']);
+        if($d !== NULL && !self::validDescription($d))
+            throw new GroupException(GroupException::CODE['DESCRIPTION_INVALID']);
         $sql = 'INSERT INTO groups(name, description) VALUES(:n, :d)';
         $q = DB::prepare($sql);
         $q->bindValue(':n', $n, PDO::PARAM_STR);
