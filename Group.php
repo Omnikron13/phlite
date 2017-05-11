@@ -83,6 +83,11 @@ class Group {
         $this->description = $d;
     }
 
+    public static function validDescription(string $d) : bool {
+        $r = Config::get('group', 'description_regex');
+        return preg_match($r, $d);
+    }
+
     /*********************
      * Member management *
      *********************/
