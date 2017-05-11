@@ -27,13 +27,14 @@ class Lock {
     public function getID() : int {
         return $this->id;
     }
-    public function getName() : string {
-        return $this->name;
-    }
 
     /********
      * Name *
      ********/
+    public function getName() : string {
+        return $this->name;
+    }
+
     public function setName(string $n) : void {
         //TODO: validate
         $sql = 'UPDATE locks SET name = :n WHERE id = :i';
