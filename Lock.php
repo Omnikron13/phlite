@@ -30,9 +30,6 @@ class Lock {
     public function getName() : string {
         return $this->name;
     }
-    public function getDescription() : string {
-        return $this->description;
-    }
 
     /********
      * Name *
@@ -50,6 +47,10 @@ class Lock {
     /***************
      * Description *
      ***************/
+    public function getDescription() : string {
+        return $this->description;
+    }
+
     public function setDescription(string $d) : void {
         //TODO: validate
         $sql = 'UPDATE locks SET description = :d WHERE id = :i';
