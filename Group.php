@@ -74,7 +74,8 @@ class Group {
     }
 
     public function setDescription(string $d) : void {
-        //TODO: validate
+        if(!self::validDescription($d))
+            throw new GroupException(GroupException::CODE['DESCRIPTION_INVALID']);
         $sql = 'UPDATE groups SET description = :d WHERE id = :i';
         $q = DB::prepare($sql);
         $q->bindValue(':i', $this->id, PDO::PARAM_INT);
