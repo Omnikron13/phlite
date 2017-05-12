@@ -45,6 +45,11 @@ class Lock {
         $this->name = $n;
     }
 
+    public static function validName(string $n) : bool {
+        $r = Config::get('lock', 'name_regex');
+        return preg_match($r, $n);
+    }
+
     /***************
      * Description *
      ***************/
