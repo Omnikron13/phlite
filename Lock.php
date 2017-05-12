@@ -70,7 +70,8 @@ class Lock {
     }
 
     public function setDescription(string $d) : void {
-        //TODO: validate
+        if(!self::validDescription($d))
+            throw new LockException(LockException::CODE['DESCRIPTION_INVALID']);
         $sql = 'UPDATE locks SET description = :d WHERE id = :i';
         $q = DB::prepare($sql);
         $q->bindValue(':i', $this->id, PDO::PARAM_INT);
