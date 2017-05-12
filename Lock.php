@@ -96,6 +96,12 @@ class Lock {
     }
 
     public static function add(string $n, ?string $d = NULL) : self {
+        if(!self::validName($n))
+            throw new LockException(LockException::CODE['NAME_INVALID']);
+        if(!self::availableName($n))
+            throw new LockException(LockException::CODE['NAME_UNAVAILABLE']);
+        if($d !== NULL && !self::validDescription($d))
+            throw new LockException(LockException::CODE['DESCRIPTION_INVALID']);
         $sql = 'INSERT INTO locks(name, description) VALUES(:n, :d)';
         $q = DB::prepare($sql);
         $q->bindValue(':n', $n, PDO::PARAM_STR);
