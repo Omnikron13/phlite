@@ -79,6 +79,11 @@ class Lock {
         $this->description = $d;
     }
 
+    public static function validDescription(string $d) : bool {
+        $r = Config::get('lock', 'description_regex');
+        return preg_match($r, $d);
+    }
+
     /*******************
      * Lock management *
      *******************/
