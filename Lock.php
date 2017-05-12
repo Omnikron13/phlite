@@ -37,7 +37,10 @@ class Lock {
     }
 
     public function setName(string $n) : void {
-        //TODO: validate
+        if(!self::validName($n))
+            throw new LockException(LockException::CODE['NAME_INVALID']);
+        if(!self::availableName($n))
+            throw new LockException(LockException::CODE['NAME_UNAVAILABLE']);
         $sql = 'UPDATE locks SET name = :n WHERE id = :i';
         $q = DB::prepare($sql);
         $q->bindValue(':i', $this->id, PDO::PARAM_INT);
