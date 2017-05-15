@@ -128,4 +128,18 @@ class Session {
     }
 }
 
+class SessionException extends PhliteException {
+    public const CODE_PREFIX = 400;
+    public const CODE = [
+        'SESSION_NOT_FOUND' => self::CODE_PREFIX + 1,
+    ];
+    protected const MESSAGE = [
+        self::CODE['SESSION_NOT_FOUND'] => 'Session not found',
+    ];
+
+    public function __construct(int $code) {
+        parent::__construct("$code ".self::MESSAGE[$code], $code);
+    }
+}
+
 ?>
