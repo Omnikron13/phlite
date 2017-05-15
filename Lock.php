@@ -22,7 +22,8 @@ class Lock {
         $q->bindColumn('name',        $this->name,        PDO::PARAM_STR);
         $q->bindColumn('description', $this->description, PDO::PARAM_STR);
         $q->fetch(PDO::FETCH_BOUND);
-        //TODO: throw on failure
+        if($this->id === NULL)
+            throw new LockException(LockException::CODE['LOCK_NOT_FOUND']);
     }
 
     public function getID() : int {
