@@ -1,5 +1,5 @@
 <?php
-namespace PHlite;
+namespace Phlite;
 
 class Base64 {
     public static function encode(string $s) : string {

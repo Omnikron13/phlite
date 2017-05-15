@@ -1,5 +1,5 @@
 <?php
-namespace PHlite;
+namespace Phlite;
 
 use PDO;
 

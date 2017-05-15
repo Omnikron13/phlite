@@ -1,5 +1,5 @@
 <?php
-namespace PHlite;
+namespace Phlite;
 
 class Config {
     protected const DEFAULT_FILE = 'defaults.cfg';
