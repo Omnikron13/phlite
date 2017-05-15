@@ -8,6 +8,7 @@ require_once 'DB.php';
 require_once 'User.php';
 require_once 'Base64.php';
 require_once 'Cookie.php';
+require_once 'PhliteException.php';
 
 class Session {
     protected $id     = NULL;
