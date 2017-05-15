@@ -28,7 +28,8 @@ class Session {
         $q->bindColumn('IP',     $this->IP,     PDO::PARAM_STR);
         $q->bindColumn('active', $this->active, PDO::PARAM_INT);
         $q->fetch(PDO::FETCH_BOUND);
-        //TODO: throw on failure
+        if($this->id === NULL)
+            throw new SessionException(SessionException::CODE['SESSION_NOT_FOUND']);
     }
 
     public function getID() : int {
