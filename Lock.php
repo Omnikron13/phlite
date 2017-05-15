@@ -6,7 +6,7 @@ use PDO;
 require_once 'DB.php';
 require_once 'Group.php';
 require_once 'User.php';
-require_once 'LockException.php';
+require_once 'PhliteException.php';
 
 class Lock {
     protected $id         = NULL;
@@ -198,6 +198,26 @@ class Lock {
         DB::execFile('sql/locks.sql');
         DB::execFile('sql/locks_group_keys.sql');
         DB::execFile('sql/locks_user_keys.sql');
+    }
+}
+
+class LockException extends PhliteException {
+    public const CODE_PREFIX = 300;
+    public const CODE = [
+        'LOCK_NOT_FOUND'      => self::CODE_PREFIX + 1,
+        'NAME_INVALID'        => self::CODE_PREFIX + 2,
+        'NAME_UNAVAILABLE'    => self::CODE_PREFIX + 3,
+        'DESCRIPTION_INVALID' => self::CODE_PREFIX + 4,
+    ];
+    protected const MESSAGE = [
+        self::CODE['LOCK_NOT_FOUND']      => 'Lock not found',
+        self::CODE['NAME_INVALID']        => 'Invalid lock name',
+        self::CODE['NAME_UNAVAILABLE']    => 'Unavailable lock name',
+        self::CODE['DESCRIPTION_INVALID'] => 'Invalid lock description',
+    ];
+
+    public function __construct(int $code) {
+        parent::__construct("$code ".self::MESSAGE[$code], $code);
     }
 }
 
