@@ -78,7 +78,7 @@ class Session {
         return $s;
     }
 
-    public static function start(User $u) : self {
+    public static function start(User $u) : string {
         self::free($u);
         $key = self::generateKey();
         $sql = 'INSERT INTO users_sessions(userID, key, IP, active) VALUES(:u, :k, :i, :a)';
@@ -88,10 +88,10 @@ class Session {
         $q->bindValue(':i', $_SERVER['REMOTE_ADDR'],  PDO::PARAM_STR);
         $q->bindValue(':a', $_SERVER['REQUEST_TIME'], PDO::PARAM_INT);
         $q->execute();
-        $s = new self(DB::get()->lastInsertId());
-        Cookie::send('sessionID',  $s->getID());
+        $id = DB::get()->lastInsertId();
+        Cookie::send('sessionID',  $id);
         Cookie::send('sessionKey', $key);
-        return $s;
+        return "$id:$key";
     }
 
     protected static function free(User $u) : void {
