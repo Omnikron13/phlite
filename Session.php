@@ -40,9 +40,7 @@ class Session {
         return new User($this->userID);
     }
 
-    public function check(?string $k = NULL) : bool {
-        if($k === NULL)
-            $k = $_COOKIE['sessionKey'];
+    public function check(string $k) : bool {
         if($_SERVER['REMOTE_ADDR'] != $this->IP)
             return false;
         if(!password_verify($k, $this->key))
@@ -65,15 +63,15 @@ class Session {
         $q = DB::prepare($sql);
         $q->bindValue(':i', $this->id, PDO::PARAM_INT);
         $q->execute();
-        Cookie::clear('sessionID');
-        Cookie::clear('sessionKey');
+        Cookie::clear('session');
     }
 
     public static function getCurrent() : ?self {
-        if(!isset($_COOKIE['sessionID']))
+        if(!isset($_COOKIE['session']))
             return NULL;
-        $s = new self($_COOKIE['sessionID']);
-        if(!$s->check())
+        $idkey = explode(':', $_COOKIE['session']);
+        $s = new self($idkey[0]);
+        if(!$s->check($idkey[1]))
             return NULL;
         return $s;
     }
@@ -89,8 +87,7 @@ class Session {
         $q->bindValue(':a', $_SERVER['REQUEST_TIME'], PDO::PARAM_INT);
         $q->execute();
         $id = DB::get()->lastInsertId();
-        Cookie::send('sessionID',  $id);
-        Cookie::send('sessionKey', $key);
+        Cookie::send('session', "$id:$key");
         return "$id:$key";
     }
 
