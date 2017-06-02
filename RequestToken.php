@@ -6,6 +6,7 @@ use PDO;
 require_once 'DB.php';
 require_once 'Base64.php';
 require_once 'User.php';
+require_once 'PhliteException.php';
 
 class RequestToken {
     protected $id     = NULL;
@@ -87,6 +88,20 @@ class RequestToken {
             'cost' => Config::get('request_token', 'hash_cost'),
         ];
         return password_hash($t, PASSWORD_BCRYPT, $opt);
+    }
+}
+
+class RequestTokenException extends PhliteException {
+    public const CODE_PREFIX = 500;
+    public const CODE = [
+        'TOKEN_NOT_FOUND' => self::CODE_PREFIX + 1,
+    ];
+    protected const MESSAGE = [
+        self::CODE['TOKEN_NOT_FOUND'] => 'Request token not found',
+    ];
+
+    public function __construct(int $code) {
+        parent::__construct("$code ".self::MESSAGE[$code], $code);
     }
 }
 
