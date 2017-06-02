@@ -259,6 +259,13 @@ class User {
     /*******************
      * User management *
      *******************/
+    public function remove() : void {
+        $sql = 'DELETE FROM users WHERE id = :i';
+        $q = DB::prepare($sql);
+        $q->bindValue(':i', $this->id, PDO::PARAM_INT);
+        $q->execute();
+    }
+
     public static function add(string $username, string $password, string $email) : self {
         if(!self::validUsername($username))
             throw new UserException(UserException::CODE['USERNAME_INVALID']);
