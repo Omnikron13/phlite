@@ -24,7 +24,8 @@ class RequestToken {
         $q->bindColumn('token',  $this->token,  PDO::PARAM_STR);
         $q->bindColumn('time',   $this->time,   PDO::PARAM_INT);
         $q->fetch(PDO::FETCH_BOUND);
-        //TODO: throw on fail
+        if($this->id === NULL)
+            throw new RequestTokenException(RequestTokenException::CODE['TOKEN_NOT_FOUND']);
     }
 
     public function remove() : void {
