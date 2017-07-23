@@ -287,6 +287,12 @@ Removes the group from the database.
 
 === Static methods
 
+==== __construct(int $id)
+
+The *Group* constructor accepts the *id* of a group in the database as '$id'.
+If no group with that id can be found it will throw a *GroupException* with code *201*.
+
+
 ==== add(string $name, ?string $description = NULL) : Group
 
 Attempts to add a new group to the database with the '$name' and '$description' provided, returning a *Group* object representing the new group.
