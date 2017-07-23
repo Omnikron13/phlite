@@ -384,13 +384,18 @@ Throws a *LockException* with code *304* if '$description' is invalid.
 See *validDescription()* for more details.
 
 
-==== remove() : void
 ==== grantGroupKey(Group $group) : void
 ==== checkGroupKey(Group $group) : bool
 ==== revokeGroupKey(Group $group) : void
 ==== grantUserKey(User $user) : void
 ==== checkUserKey(User $user, bool $checkGroups = true) : bool
 ==== revokeUserKey(User $user) : void
+
+
+==== remove() : void
+
+Removes the lock from the database.
+
 
 === Static methods
 
