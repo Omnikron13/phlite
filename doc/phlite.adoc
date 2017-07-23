@@ -366,6 +366,12 @@ Returns the *name* of the lock.
 
 
 ==== setName(string $name) : void
+
+Updates the lock's *name* in the database.
+Throws a *LockException* with code *302* if '$name' is invalid, code *303* if unavailable.
+See *validName()* & *availableName()* for more details.
+
+
 ==== getDescription() : string
 ==== setDescription(string $description) : void
 ==== remove() : void
