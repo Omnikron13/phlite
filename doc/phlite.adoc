@@ -351,3 +351,30 @@ tables from the following schema files:
 ////////////////////
 // TODO: Lock API //
 ////////////////////
+== Lock API
+
+=== Instance methods
+
+==== getID() : int
+==== getName() : string
+==== setName(string $name) : void
+==== getDescription() : string
+==== setDescription(string $description) : void
+==== remove() : void
+==== grantGroupKey(Group $group) : void
+==== checkGroupKey(Group $group) : bool
+==== revokeGroupKey(Group $group) : void
+==== grantUserKey(User $user) : void
+==== checkUserKey(User $user, bool $checkGroups = true) : bool
+==== revokeUserKey(User $user) : void
+
+=== Static methods
+
+==== __construct(int $id)
+==== validName(string $name) : bool
+==== availableName(string $name) : bool
+==== validDescription(string $description) : bool
+==== add(string $name, ?string $description = NULL) : self
+==== getAll() : array
+==== setupDB() : void
+
