@@ -1,0 +1,347 @@
+= PHLITE(7)
+:doctype: manpage
+//left alignment fails with asciidoc, requiring asciidoctor
+:toc: left
+//3 levels might be preferable, but produces too large a toc without left alignment
+:toclevels: 2
+
+
+== NAME
+phlite - a lightweight PHP user authentication and permission library
+
+
+== SYNOPSIS
+Phlite is a PHP library designed to facilitate the creation of SQLite based websites which require user authentication and variable user permissions.
+
+
+== DESCRIPTION
+The primary API is provided by the *User*, *Group* and *Lock* classes:
+
+* *User* provides functionaliy for user management, login/authentication and CSRF prevention.
+* *Group* provides functionality for categorising users into user groups.
+* *Lock* provides functionality to facilitate restricting access to areas or actions to certain users and/or user groups.
+
+Ancillary functionality is provided by the *DB* and *Config* classes:
+
+* *DB* provides access to the database file via a 'PDO' instance.
+* *Config* is used to load configuration files at the start of scripts/pages using *Phlite*.
+
+Additional utility & low level functionality is provided by the *Base64*, *Cookie*, *RequestToken* and *Session* classes.
+These classes likely do not need to be used directly.
+
+
+== User API
+
+=== Instance methods
+
+==== getID() : int
+
+Returns the unique *id* of the user.
+
+
+==== getUsername() : string
+
+Returns the *username* of the user.
+
+
+==== getEmail() : string
+
+Returns the *email* of the user.
+
+
+==== getRegisterTime() : int
+
+Returns a UNIX timestamp of the time the user was added to the database.
+
+
+==== setUsername(string $username) : void
+
+Updates the user's *username* in the database.
+Throws a *UserException* with code *102* if '$username' is invalid, code *103* if unavailable.
+See *validUsername()* & *availableUsername()* for more details.
+
+
+==== setPassword(string $password) : void
+
+Updates the user's *password* in the database.
+The password is currently always hashed with the 'BCRYPT' algorithm with the cost being controlled by the *password_hash_cost* config parameter under the *[user]* section.
+Throws a *UserException* with code *106* if '$password' is invalid.
+See *validPassword()* for more details.
+
+
+==== setEmail(string $email) : void
+
+Updates the user's *email* in the database.
+Throws a *UserException* with code *104* if '$email' is invalid, code *105* if unavailable.
+See *validEmail()* & *availableEmail()* for more details.
+
+
+==== checkPassword(string $password) : bool
+
+Returns *true* if '$password' matches the stored hash, *false* otherwise.
+
+
+==== generateRequestToken() : string
+
+Returns a token which can be used in HTML forms to protect against 'CSRF' attacks.
+Config parameters for request tokens are in the *[request_token]* section of config files:
+
+* *max* controls how many request tokens can be active and valid for each user simultaneously.
+* *bytes* controls how many pseudo-random bytes are used to generate the token.
+* *hash_cost* controls the cost parameter of the hashing algorithm (currently always 'BCRYPT') used to hash the token before storing it in the database.
+* *ttl* controls the number of seconds (from script execution time) that tokens will be considered valid for.
+
+
+==== checkRequestToken(string $token) : bool
+
+Returns *true* if '$token' matches any tokens generated previously for the user with *generateRequestToken()*.
+Returns *false* if the token has timed out (exceeded the *ttl*) or does not match.
+Once a token has been used once it is removed from the database and subsequent attempts to verify it will return *false*.
+
+
+==== remove() : void
+
+Removes the user from the database.
+
+
+=== Static methods
+
+==== __construct(int $id)
+
+The *User* constructor accepts the *id* of a user in the database as '$id'.
+If no user with that id can be found it will throw a *UserException* with code *101*.
+
+
+==== add(string $username, string $password, string $email) : User
+
+Attempts to add a new user to the database with the '$username', '$email' and '$password' provided, returning a *User* object representing the new user.
+Throws a *UserException* on failure with one of the following codes:
+
+* *102* - invalid username
+* *103* - unavailable username
+* *104* - invalid email address
+* *105* - unavailable email address
+* *106* - invalid password
+
+See
+*validUsername()*,
+*availableUsername()*,
+*validEmail()*,
+*availableEmail()* &
+*validPassword()*
+for more details.
+
+
+==== getCurrent() : ?User
+
+Returns either a *User* object representing the currently logged in user, or *NULL* if no user is logged in.
+
+
+==== getAll() : array
+
+Returns an array of *User* objects representing all users in the database.
+
+
+==== getByID(int $id) : ?User
+
+Returns a *User* representing the user referenced by '$id', or *NULL* if no user with that id found.
+
+
+==== getByUsername(string $username) : ?User
+
+Returns a *User* representing the user referenced by '$username', or *NULL* if no user with that username found.
+
+
+==== getByEmail(string $email) : ?User
+
+Returns a *User* representing the user referenced by '$email', or *NULL* if no user with that email found.
+
+
+==== login(string $username, string $password) : array
+
+Attempts to start a new session for the user specified by '$username', authenticating with '$password'.
+If successful cookie headers will be sent meaning this function must be called before any output.
+Returns an array with details of the login attempt.
+The *success* key is a boolean which is *true* on successful logins, *false* on failures.
+
+For failures there will be an *code* key indicating the reason the login attempt failed with one of the codes from the *User::LOGIN_ERROR[]* array.
+Possible codes are;
+'NO_USERNAME',
+'NO_PASSWORD',
+'NO_SUCH_USER',
+'INCORRECT_PASSWORD',
+'USER_IN_COOLDOWN' &
+'FREQUENCY_EXCEEDED'
+
+For successes there will be a *user* key containing a *User* object represnting the logged in user, along with a *session* key containing an id:key string.
+
+
+==== logout() : void
+
+Ends any session currently associated with the browser accessing the page it is called from.
+This function needs to send cookie headers and so must be called before any output.
+
+
+==== validUsername(string $username) : bool
+
+Returns *true* if '$username' is a valid username, otherwise *false*.
+Validity is determined by a regex loaded from the *username_regex* parameter in the *[user]* section of config files.
+
+
+==== availableUsername(string $username) : bool
+
+Returns *false* if '$username' is a username in use already in the database, otherwise returns *true*.
+
+
+==== validEmail(string $email) : bool
+
+Returns *true* if '$email' is a \'valid' email, otherwise *false*.
+Validity is determined by a regex loaded from the *email_regex* parameter in the *[user]* section of config files.
+
+
+==== availableEmail(string $email) : bool
+
+Returns *false* if '$email' is an email in use already in the database, otherwise returns *true*.
+
+
+==== validPassword(string $password) : bool
+
+Returns *true* if '$password' is a valid password, otherwise *false*.
+Validity is determined by a regex loaded from the *password_regex* parameter in the *[user]* section of config files.
+
+
+==== setupDB() : void
+
+Loads database schemas for the
+*users*,
+*users_verify*,
+*users_sessions*,
+*users_logins* &
+*users_request_tokens*
+tables from the following schema files:
+
+* 'sql/users.sql'
+* 'sql/users_verify.sql'
+* 'sql/users_sessions.sql'
+* 'sql/users_logins.sql'
+* 'sql/users_request_tokens.sql'
+
+
+== Group API
+
+=== Instance methods
+
+==== getID() : int
+
+Returns the unique *id* of the group.
+
+
+==== getName() : string
+
+Returns the *name* of the group.
+
+
+==== getDescription() : string
+
+Returns the *description* of the group.
+
+
+==== setName(string $name) : void
+
+Updates the group's *name* in the database.
+Throws a *GroupException* with code *202* if '$name' is invalid, *203* if unavailable.
+See *validName()* & *availableName()* for more details.
+
+
+==== setDescription(string $description) : void
+
+Updates the group's *description* in the database.
+Throws a *GroupException* with code *204* if '$description' is invalid.
+See *validDescription()* for more details.
+
+
+==== addMember(User $user) : void
+
+Adds '$user' to the group in the database.
+
+
+==== getMembers() : array
+
+Returns an array of *User* objects representing the group's members.
+
+
+==== containsMember(User $user) : bool
+
+Returns *true* if group contains '$user', otherwise *false*.
+
+
+==== removeMember(User $user) : void
+
+Removes '$user' from the group in the database.
+
+
+==== remove() : void
+
+Removes the group from the database.
+
+
+=== Static methods
+
+==== add(string $name, ?string $description = NULL) : Group
+
+Attempts to add a new group to the database with the '$name' and '$description' provided, returning a *Group* object representing the new group.
+Throws a *GroupException* on failute with one of the following codes:
+
+* *202* - invalid group name
+* *203* - unavailable group name
+* *204* - invalid group description
+
+See
+*validName()*,
+*availableName()* &
+*validDescription()*
+for more details.
+
+
+==== getAll() : array
+
+Returns an array of *Group* objects representing all groups in the database.
+
+
+//TODO: move this if it gets changed to User->getGroups() in source
+==== getUserGroups(User $user) : array
+
+Returns an array of *Group* objects representing all groups which '$user' is a member of.
+
+
+==== validName(string $name) : bool
+
+Returns *true* if '$name' is a valid group name, otherwise *false*.
+Validity is determined by a regex loaded from the *name_regex* parameter in the *[group]* section of config files.
+
+
+==== availableName(string $name) : bool
+
+Returns *false* if '$name' is a group name in use already in the database, otherwise *true*.
+
+
+==== validDescription(string $description) : bool
+
+Returns *true* if '$description' is a valid group description, otherwise *false*.
+Validity is determined by a regex loaded from the *description_regex* parameter in the *[group]* section of config files.
+
+
+==== setupDB() : void
+
+Loads database schemas for the
+*groups* &
+*groups_members*
+tables from the following schema files:
+
+* 'sql/groups.sql'
+* 'sql/groups_members.sql'
+
+
+////////////////////
+// TODO: Lock API //
+////////////////////
