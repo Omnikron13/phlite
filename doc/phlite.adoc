@@ -373,6 +373,10 @@ See *validName()* & *availableName()* for more details.
 
 
 ==== getDescription() : string
+
+Returns the *description* of the lock.
+
+
 ==== setDescription(string $description) : void
 ==== remove() : void
 ==== grantGroupKey(Group $group) : void
