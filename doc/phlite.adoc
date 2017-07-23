@@ -378,6 +378,12 @@ Returns the *description* of the lock.
 
 
 ==== setDescription(string $description) : void
+
+Updates the lock's *description* in the database.
+Throws a *LockException* with code *304* if '$description' is invalid.
+See *validDescription()* for more details.
+
+
 ==== remove() : void
 ==== grantGroupKey(Group $group) : void
 ==== checkGroupKey(Group $group) : bool
