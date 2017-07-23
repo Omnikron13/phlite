@@ -356,6 +356,10 @@ tables from the following schema files:
 === Instance methods
 
 ==== getID() : int
+
+Returns the unique *id* of the lock.
+
+
 ==== getName() : string
 ==== setName(string $name) : void
 ==== getDescription() : string
