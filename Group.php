@@ -174,6 +174,7 @@ class Group {
         return $g;
     }
 
+    //TODO: consider moving this to User->getGroups()
     public static function getUserGroups(User $u) : array {
         $sql = 'SELECT groupID FROM groups_members WHERE userID = :u';
         $q = DB::prepare($sql);
