@@ -361,6 +361,10 @@ Returns the unique *id* of the lock.
 
 
 ==== getName() : string
+
+Returns the *name* of the lock.
+
+
 ==== setName(string $name) : void
 ==== getDescription() : string
 ==== setDescription(string $description) : void
