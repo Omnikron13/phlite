@@ -421,6 +421,11 @@ See
 for more details.
 
 
+==== getAll() : array
+
+Returns an array of *Lock* objects representing all locks in the database.
+
+
 ==== validName(string $name) : bool
 
 Returns *true* if '$name' is a valid lock name, otherwise *false*.
@@ -438,6 +443,5 @@ Returns *true* if '$description' is a valid lock description, otherwise *false*.
 Validity is determined by a regex loaded from the *description_regex* parameter in the *[lock]* section of config files.
 
 
-==== getAll() : array
 ==== setupDB() : void
 
