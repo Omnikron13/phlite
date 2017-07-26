@@ -400,6 +400,11 @@ Removes the lock from the database.
 === Static methods
 
 ==== __construct(int $id)
+
+The *Lock* constructor accepts the *id* of a lock in the database as '$id'.
+If no lock with that id can be found it will throw a *LockException* with code *301*.
+
+
 ==== validName(string $name) : bool
 ==== availableName(string $name) : bool
 ==== validDescription(string $description) : bool
