@@ -445,3 +445,14 @@ Validity is determined by a regex loaded from the *description_regex* parameter 
 
 ==== setupDB() : void
 
+Loads database schemas for the
+*locks*,
+*locks_group_keys* &
+*locks_user_keys*
+tables from the following schema files:
+
+* 'sql/locks.sql'
+* 'sql/locks_group_keys.sql'
+* 'sql/locks_user_keys.sql'
+
+
