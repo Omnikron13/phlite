@@ -406,6 +406,11 @@ If no lock with that id can be found it will throw a *LockException* with code *
 
 
 ==== validName(string $name) : bool
+
+Returns *true* if '$name' is a valid lock name, otherwise *false*.
+Validity is determined by a regex loaded from the *name_regex* parameter in the *[lock]* section of config files.
+
+
 ==== availableName(string $name) : bool
 ==== validDescription(string $description) : bool
 ==== add(string $name, ?string $description = NULL) : self
