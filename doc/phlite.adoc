@@ -412,6 +412,10 @@ Validity is determined by a regex loaded from the *name_regex* parameter in the 
 
 
 ==== availableName(string $name) : bool
+
+Returns *false* if '$name' is a lock name in use already in the database, otherwise *true*.
+
+
 ==== validDescription(string $description) : bool
 ==== add(string $name, ?string $description = NULL) : self
 ==== getAll() : array
