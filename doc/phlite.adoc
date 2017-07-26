@@ -417,6 +417,11 @@ Returns *false* if '$name' is a lock name in use already in the database, otherw
 
 
 ==== validDescription(string $description) : bool
+
+Returns *true* if '$description' is a valid lock description, otherwise *false*.
+Validity is determined by a regex loaded from the *description_regex* parameter in the *[lock]* section of config files.
+
+
 ==== add(string $name, ?string $description = NULL) : self
 ==== getAll() : array
 ==== setupDB() : void
