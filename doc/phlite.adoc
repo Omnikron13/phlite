@@ -405,6 +405,22 @@ The *Lock* constructor accepts the *id* of a lock in the database as '$id'.
 If no lock with that id can be found it will throw a *LockException* with code *301*.
 
 
+==== add(string $name, ?string $description = NULL) : self
+
+Attempts to add a new lock to the database with the '$name' and '$description' provided, returning a *Lock* object representing the new lock.
+Throws a *LockException* on failure with one of the following codes:
+
+* *302* - invalid lock name
+* *303* - unavailable lock name
+* *304* - invalid lock description
+
+See
+*validName()*,
+*availableName()* &
+*validDescription()*
+for more details.
+
+
 ==== validName(string $name) : bool
 
 Returns *true* if '$name' is a valid lock name, otherwise *false*.
@@ -422,7 +438,6 @@ Returns *true* if '$description' is a valid lock description, otherwise *false*.
 Validity is determined by a regex loaded from the *description_regex* parameter in the *[lock]* section of config files.
 
 
-==== add(string $name, ?string $description = NULL) : self
 ==== getAll() : array
 ==== setupDB() : void
 
