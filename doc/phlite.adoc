@@ -402,7 +402,10 @@ Removes the \'key' for this lock registered for '$group' in the 'locks_group_key
 
 ==== grantUserKey(User $user) : void
 ==== checkUserKey(User $user, bool $checkGroups = true) : bool
+
 ==== revokeUserKey(User $user) : void
+
+Removes the \'key' for this lock registered for '$user' in the 'locks_user_keys' table in the database (if one exists).
 
 
 ==== remove() : void
