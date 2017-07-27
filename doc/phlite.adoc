@@ -408,6 +408,11 @@ This allows the user to be verified with *checkUserKey()*.
 
 ==== checkUserKey(User $user, bool $checkGroups = true) : bool
 
+Returns *true* if '$user' is registered as having a \'key' to this lock in the 'locks_user_keys' table in the database.
+Additionally returns *true* if '$checkGroups' is set to *true* and any of the groups the user is a member of are registered as having a key in the 'locks_group_keys' table.
+Returns *false* otherwise.
+
+
 ==== revokeUserKey(User $user) : void
 
 Removes the \'key' for this lock registered for '$user' in the 'locks_user_keys' table in the database (if one exists).
