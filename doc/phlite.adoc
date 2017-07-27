@@ -391,6 +391,10 @@ This allows the group to be verified with *checkGroupKey()* (and its members to 
 
 
 ==== checkGroupKey(Group $group) : bool
+
+Returns *true* if '$group' is registered as having a \'key' to this lock in the 'locks_group_keys' table in the database, otherwise *false*.
+
+
 ==== revokeGroupKey(Group $group) : void
 ==== grantUserKey(User $user) : void
 ==== checkUserKey(User $user, bool $checkGroups = true) : bool
