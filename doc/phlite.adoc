@@ -520,6 +520,22 @@ tables from the following schema files:
 |======================================================
 
 
+.SessionException
+|======================================================
+|Code |Name                 |Message
+
+|401  |SESSION_NOT_FOUND    |Session not found
+|======================================================
+
+
+.RequestTokenException
+|======================================================
+|Code |Name                 |Message
+
+|501  |TOKEN_NOT_FOUND      |Request token not found
+|======================================================
+
+
 == COPYRIGHT
 
 Copyright (C) 2017 Joey Sabey <GameFreak7744@gmail.com>
