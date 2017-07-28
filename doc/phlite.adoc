@@ -483,3 +483,10 @@ tables from the following schema files:
 * 'sql/locks_user_keys.sql'
 
 
+== COPYRIGHT
+
+Copyright (C) 2017 Joey Sabey <GameFreak7744@gmail.com>
+
+Phlite is licensed under the MIT licence, a copy of which is included in the 'LICENCE' file.
+
+
