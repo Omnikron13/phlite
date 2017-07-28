@@ -483,6 +483,43 @@ tables from the following schema files:
 * 'sql/locks_user_keys.sql'
 
 
+== Exceptions
+
+.UserException
+|======================================================
+|Code |Name                 |Message
+
+|101  |USER_NOT_FOUND       |User not found
+|102  |USERNAME_INVALID     |Invalid username
+|103  |USERNAME_UNAVAILABLE |Unavailable username
+|104  |EMAIL_INVALID        |Invalid email address
+|105  |EMAIL_UNAVAILABLE    |Unavailable email address
+|106  |PASSWORD_INVALID     |Invalid password
+|======================================================
+
+
+.GroupException
+|======================================================
+|Code |Name                 |Message
+
+|201  |GROUP_NOT_FOUND      |Group not found
+|202  |NAME_INVALID         |Invalid group name
+|203  |NAME_UNAVAILABLE     |Unavailable group name
+|204  |DESCRIPTION_INVALID  |Invalid group description
+|======================================================
+
+
+.LockException
+|======================================================
+|Code |Name                 |Message
+
+|301  |LOCK_NOT_FOUND       |Lock not found
+|302  |NAME_INVALID         |Invalid lock name
+|303  |NAME_UNAVAILABLE     |Unavailable lock name
+|304  |DESCRIPTION_INVALID  |Invalid lock description
+|======================================================
+
+
 == COPYRIGHT
 
 Copyright (C) 2017 Joey Sabey <GameFreak7744@gmail.com>
