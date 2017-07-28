@@ -1,5 +1,6 @@
 = PHLITE(7)
 :doctype: manpage
+:man manual: Phlite Manual
 //left alignment fails with asciidoc, requiring asciidoctor
 :toc: left
 //3 levels might be preferable, but produces too large a toc without left alignment
