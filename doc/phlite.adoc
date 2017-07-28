@@ -431,7 +431,7 @@ The *Lock* constructor accepts the *id* of a lock in the database as '$id'.
 If no lock with that id can be found it will throw a *LockException* with code *301*.
 
 
-==== add(string $name, ?string $description = NULL) : self
+==== add(string $name, ?string $description = NULL) : Lock
 
 Attempts to add a new lock to the database with the '$name' and '$description' provided, returning a *Lock* object representing the new lock.
 Throws a *LockException* on failure with one of the following codes:
