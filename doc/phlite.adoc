@@ -37,16 +37,36 @@ These classes likely do not need to be used directly.
 
 == User API
 
+=== Username
+
+==== getUsername() : string
+
+Returns the *username* of the user.
+
+
+==== setUsername(string $username) : void
+
+Updates the user's *username* in the database.
+Throws a *UserException* with code *102* if '$username' is invalid, code *103* if unavailable.
+See *validUsername()* & *availableUsername()* for more details.
+
+
+==== validUsername(string $username) : bool
+
+Returns *true* if '$username' is a valid username, otherwise *false*.
+Validity is determined by a regex loaded from the *username_regex* parameter in the *[user]* section of config files.
+
+
+==== availableUsername(string $username) : bool
+
+Returns *false* if '$username' is a username in use already in the database, otherwise returns *true*.
+
+
 === Instance methods
 
 ==== getID() : int
 
 Returns the unique *id* of the user.
-
-
-==== getUsername() : string
-
-Returns the *username* of the user.
 
 
 ==== getEmail() : string
@@ -57,13 +77,6 @@ Returns the *email* of the user.
 ==== getRegisterTime() : int
 
 Returns a UNIX timestamp of the time the user was added to the database.
-
-
-==== setUsername(string $username) : void
-
-Updates the user's *username* in the database.
-Throws a *UserException* with code *102* if '$username' is invalid, code *103* if unavailable.
-See *validUsername()* & *availableUsername()* for more details.
 
 
 ==== setPassword(string $password) : void
@@ -185,17 +198,6 @@ For successes there will be a *user* key containing a *User* object represnting 
 
 Ends any session currently associated with the browser accessing the page it is called from.
 This function needs to send cookie headers and so must be called before any output.
-
-
-==== validUsername(string $username) : bool
-
-Returns *true* if '$username' is a valid username, otherwise *false*.
-Validity is determined by a regex loaded from the *username_regex* parameter in the *[user]* section of config files.
-
-
-==== availableUsername(string $username) : bool
-
-Returns *false* if '$username' is a username in use already in the database, otherwise returns *true*.
 
 
 ==== validEmail(string $email) : bool
