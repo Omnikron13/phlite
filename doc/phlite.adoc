@@ -64,25 +64,25 @@ Returns *false* if '$username' is a username in use already in the database, oth
 
 === Email
 
-==== getEmail() : string
+==== $user->getEmail() : string
 
 Returns the *email* of the user.
 
 
-==== setEmail(string $email) : void
+==== $user->setEmail(string $email) : void
 
 Updates the user's *email* in the database.
 Throws a *UserException* with code *104* if '$email' is invalid, code *105* if unavailable.
 See *validEmail()* & *availableEmail()* for more details.
 
 
-==== validEmail(string $email) : bool
+==== User::validEmail(string $email) : bool
 
 Returns *true* if '$email' is a \'valid' email, otherwise *false*.
 Validity is determined by a regex loaded from the *email_regex* parameter in the *[user]* section of config files.
 
 
-==== availableEmail(string $email) : bool
+==== User::availableEmail(string $email) : bool
 
 Returns *false* if '$email' is an email in use already in the database, otherwise returns *true*.
 
