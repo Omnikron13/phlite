@@ -39,25 +39,25 @@ These classes likely do not need to be used directly.
 
 === Username
 
-==== getUsername() : string
+==== $user->getUsername() : string
 
 Returns the *username* of the user.
 
 
-==== setUsername(string $username) : void
+==== $user->setUsername(string $username) : void
 
 Updates the user's *username* in the database.
 Throws a *UserException* with code *102* if '$username' is invalid, code *103* if unavailable.
 See *validUsername()* & *availableUsername()* for more details.
 
 
-==== validUsername(string $username) : bool
+==== User::validUsername(string $username) : bool
 
 Returns *true* if '$username' is a valid username, otherwise *false*.
 Validity is determined by a regex loaded from the *username_regex* parameter in the *[user]* section of config files.
 
 
-==== availableUsername(string $username) : bool
+==== User::availableUsername(string $username) : bool
 
 Returns *false* if '$username' is a username in use already in the database, otherwise returns *true*.
 
