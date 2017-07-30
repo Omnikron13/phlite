@@ -87,17 +87,7 @@ Validity is determined by a regex loaded from the *email_regex* parameter in the
 Returns *false* if '$email' is an email in use already in the database, otherwise returns *true*.
 
 
-=== Instance methods
-
-==== getID() : int
-
-Returns the unique *id* of the user.
-
-
-==== getRegisterTime() : int
-
-Returns a UNIX timestamp of the time the user was added to the database.
-
+=== Password
 
 ==== setPassword(string $password) : void
 
@@ -110,6 +100,24 @@ See *validPassword()* for more details.
 ==== checkPassword(string $password) : bool
 
 Returns *true* if '$password' matches the stored hash, *false* otherwise.
+
+
+==== validPassword(string $password) : bool
+
+Returns *true* if '$password' is a valid password, otherwise *false*.
+Validity is determined by a regex loaded from the *password_regex* parameter in the *[user]* section of config files.
+
+
+=== Instance methods
+
+==== getID() : int
+
+Returns the unique *id* of the user.
+
+
+==== getRegisterTime() : int
+
+Returns a UNIX timestamp of the time the user was added to the database.
 
 
 ==== generateRequestToken() : string
@@ -211,12 +219,6 @@ For successes there will be a *user* key containing a *User* object represnting 
 
 Ends any session currently associated with the browser accessing the page it is called from.
 This function needs to send cookie headers and so must be called before any output.
-
-
-==== validPassword(string $password) : bool
-
-Returns *true* if '$password' is a valid password, otherwise *false*.
-Validity is determined by a regex loaded from the *password_regex* parameter in the *[user]* section of config files.
 
 
 ==== setupDB() : void
