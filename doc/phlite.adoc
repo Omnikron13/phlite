@@ -110,7 +110,7 @@ Validity is determined by a regex loaded from the *password_regex* parameter in 
 
 === Login
 
-==== login(string $username, string $password) : array
+==== User::login(string $username, string $password) : array
 
 Attempts to start a new session for the user specified by '$username', authenticating with '$password'.
 If successful cookie headers will be sent meaning this function must be called before any output.
@@ -129,7 +129,7 @@ Possible codes are;
 For successes there will be a *user* key containing a *User* object represnting the logged in user, along with a *session* key containing an id:key string.
 
 
-==== logout() : void
+==== User::logout() : void
 
 Ends any session currently associated with the browser accessing the page it is called from.
 This function needs to send cookie headers and so must be called before any output.
