@@ -137,7 +137,7 @@ This function needs to send cookie headers and so must be called before any outp
 
 === CSRF Protection
 
-==== generateRequestToken() : string
+==== $user->generateRequestToken() : string
 
 Returns a token which can be used in HTML forms to protect against 'CSRF' attacks.
 Config parameters for request tokens are in the *[request_token]* section of config files:
@@ -148,7 +148,7 @@ Config parameters for request tokens are in the *[request_token]* section of con
 * *ttl* controls the number of seconds (from script execution time) that tokens will be considered valid for.
 
 
-==== checkRequestToken(string $token) : bool
+==== $user->checkRequestToken(string $token) : bool
 
 Returns *true* if '$token' matches any tokens generated previously for the user with *generateRequestToken()*.
 Returns *false* if the token has timed out (exceeded the *ttl*) or does not match.
