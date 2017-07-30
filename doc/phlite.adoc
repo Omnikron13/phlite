@@ -209,7 +209,7 @@ Returns a *User* representing the user referenced by '$email', or *NULL* if no u
 
 === Database
 
-==== setupDB() : void
+==== User::setupDB() : void
 
 Loads database schemas for the
 *users*,
