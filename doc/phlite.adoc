@@ -157,6 +157,12 @@ Once a token has been used once it is removed from the database and subsequent a
 
 === User Management
 
+==== __construct(int $id)
+
+The *User* constructor accepts the *id* of a user in the database as '$id'.
+If no user with that id can be found it will throw a *UserException* with code *101*.
+
+
 ==== User::add(string $username, string $password, string $email) : User
 
 Attempts to add a new user to the database with the '$username', '$email' and '$password' provided, returning a *User* object representing the new user.
@@ -236,14 +242,6 @@ Returns the unique *id* of the user.
 ==== getRegisterTime() : int
 
 Returns a UNIX timestamp of the time the user was added to the database.
-
-
-=== Static methods
-
-==== __construct(int $id)
-
-The *User* constructor accepts the *id* of a user in the database as '$id'.
-If no user with that id can be found it will throw a *UserException* with code *101*.
 
 
 == Group API
