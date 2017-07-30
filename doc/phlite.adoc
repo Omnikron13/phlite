@@ -155,30 +155,7 @@ Returns *false* if the token has timed out (exceeded the *ttl*) or does not matc
 Once a token has been used once it is removed from the database and subsequent attempts to verify it will return *false*.
 
 
-=== Instance methods
-
-==== getID() : int
-
-Returns the unique *id* of the user.
-
-
-==== getRegisterTime() : int
-
-Returns a UNIX timestamp of the time the user was added to the database.
-
-
-==== remove() : void
-
-Removes the user from the database.
-
-
-=== Static methods
-
-==== __construct(int $id)
-
-The *User* constructor accepts the *id* of a user in the database as '$id'.
-If no user with that id can be found it will throw a *UserException* with code *101*.
-
+=== User Management
 
 ==== add(string $username, string $password, string $email) : User
 
@@ -198,6 +175,11 @@ See
 *availableEmail()* &
 *validPassword()*
 for more details.
+
+
+==== remove() : void
+
+Removes the user from the database.
 
 
 ==== getCurrent() : ?User
@@ -223,6 +205,26 @@ Returns a *User* representing the user referenced by '$username', or *NULL* if n
 ==== getByEmail(string $email) : ?User
 
 Returns a *User* representing the user referenced by '$email', or *NULL* if no user with that email found.
+
+
+=== Instance methods
+
+==== getID() : int
+
+Returns the unique *id* of the user.
+
+
+==== getRegisterTime() : int
+
+Returns a UNIX timestamp of the time the user was added to the database.
+
+
+=== Static methods
+
+==== __construct(int $id)
+
+The *User* constructor accepts the *id* of a user in the database as '$id'.
+If no user with that id can be found it will throw a *UserException* with code *101*.
 
 
 ==== setupDB() : void
