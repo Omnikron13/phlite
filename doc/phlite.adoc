@@ -157,7 +157,7 @@ Once a token has been used once it is removed from the database and subsequent a
 
 === User Management
 
-==== add(string $username, string $password, string $email) : User
+==== User::add(string $username, string $password, string $email) : User
 
 Attempts to add a new user to the database with the '$username', '$email' and '$password' provided, returning a *User* object representing the new user.
 Throws a *UserException* on failure with one of the following codes:
@@ -177,32 +177,32 @@ See
 for more details.
 
 
-==== remove() : void
+==== $user->remove() : void
 
 Removes the user from the database.
 
 
-==== getCurrent() : ?User
+==== User::getCurrent() : ?User
 
 Returns either a *User* object representing the currently logged in user, or *NULL* if no user is logged in.
 
 
-==== getAll() : array
+==== User::getAll() : array
 
 Returns an array of *User* objects representing all users in the database.
 
 
-==== getByID(int $id) : ?User
+==== User::getByID(int $id) : ?User
 
 Returns a *User* representing the user referenced by '$id', or *NULL* if no user with that id found.
 
 
-==== getByUsername(string $username) : ?User
+==== User::getByUsername(string $username) : ?User
 
 Returns a *User* representing the user referenced by '$username', or *NULL* if no user with that username found.
 
 
-==== getByEmail(string $email) : ?User
+==== User::getByEmail(string $email) : ?User
 
 Returns a *User* representing the user referenced by '$email', or *NULL* if no user with that email found.
 
