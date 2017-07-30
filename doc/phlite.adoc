@@ -207,6 +207,25 @@ Returns a *User* representing the user referenced by '$username', or *NULL* if n
 Returns a *User* representing the user referenced by '$email', or *NULL* if no user with that email found.
 
 
+=== Database
+
+==== setupDB() : void
+
+Loads database schemas for the
+*users*,
+*users_verify*,
+*users_sessions*,
+*users_logins* &
+*users_request_tokens*
+tables from the following schema files:
+
+* 'sql/users.sql'
+* 'sql/users_verify.sql'
+* 'sql/users_sessions.sql'
+* 'sql/users_logins.sql'
+* 'sql/users_request_tokens.sql'
+
+
 === Instance methods
 
 ==== getID() : int
@@ -225,23 +244,6 @@ Returns a UNIX timestamp of the time the user was added to the database.
 
 The *User* constructor accepts the *id* of a user in the database as '$id'.
 If no user with that id can be found it will throw a *UserException* with code *101*.
-
-
-==== setupDB() : void
-
-Loads database schemas for the
-*users*,
-*users_verify*,
-*users_sessions*,
-*users_logins* &
-*users_request_tokens*
-tables from the following schema files:
-
-* 'sql/users.sql'
-* 'sql/users_verify.sql'
-* 'sql/users_sessions.sql'
-* 'sql/users_logins.sql'
-* 'sql/users_request_tokens.sql'
 
 
 == Group API
