@@ -108,6 +108,33 @@ Returns *true* if '$password' is a valid password, otherwise *false*.
 Validity is determined by a regex loaded from the *password_regex* parameter in the *[user]* section of config files.
 
 
+=== Login
+
+==== login(string $username, string $password) : array
+
+Attempts to start a new session for the user specified by '$username', authenticating with '$password'.
+If successful cookie headers will be sent meaning this function must be called before any output.
+Returns an array with details of the login attempt.
+The *success* key is a boolean which is *true* on successful logins, *false* on failures.
+
+For failures there will be an *code* key indicating the reason the login attempt failed with one of the codes from the *User::LOGIN_ERROR[]* array.
+Possible codes are;
+'NO_USERNAME',
+'NO_PASSWORD',
+'NO_SUCH_USER',
+'INCORRECT_PASSWORD',
+'USER_IN_COOLDOWN' &
+'FREQUENCY_EXCEEDED'
+
+For successes there will be a *user* key containing a *User* object represnting the logged in user, along with a *session* key containing an id:key string.
+
+
+==== logout() : void
+
+Ends any session currently associated with the browser accessing the page it is called from.
+This function needs to send cookie headers and so must be called before any output.
+
+
 === Instance methods
 
 ==== getID() : int
@@ -194,31 +221,6 @@ Returns a *User* representing the user referenced by '$username', or *NULL* if n
 ==== getByEmail(string $email) : ?User
 
 Returns a *User* representing the user referenced by '$email', or *NULL* if no user with that email found.
-
-
-==== login(string $username, string $password) : array
-
-Attempts to start a new session for the user specified by '$username', authenticating with '$password'.
-If successful cookie headers will be sent meaning this function must be called before any output.
-Returns an array with details of the login attempt.
-The *success* key is a boolean which is *true* on successful logins, *false* on failures.
-
-For failures there will be an *code* key indicating the reason the login attempt failed with one of the codes from the *User::LOGIN_ERROR[]* array.
-Possible codes are;
-'NO_USERNAME',
-'NO_PASSWORD',
-'NO_SUCH_USER',
-'INCORRECT_PASSWORD',
-'USER_IN_COOLDOWN' &
-'FREQUENCY_EXCEEDED'
-
-For successes there will be a *user* key containing a *User* object represnting the logged in user, along with a *session* key containing an id:key string.
-
-
-==== logout() : void
-
-Ends any session currently associated with the browser accessing the page it is called from.
-This function needs to send cookie headers and so must be called before any output.
 
 
 ==== setupDB() : void
