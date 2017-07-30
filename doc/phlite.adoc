@@ -135,17 +135,7 @@ Ends any session currently associated with the browser accessing the page it is 
 This function needs to send cookie headers and so must be called before any output.
 
 
-=== Instance methods
-
-==== getID() : int
-
-Returns the unique *id* of the user.
-
-
-==== getRegisterTime() : int
-
-Returns a UNIX timestamp of the time the user was added to the database.
-
+=== CSRF Protection
 
 ==== generateRequestToken() : string
 
@@ -163,6 +153,18 @@ Config parameters for request tokens are in the *[request_token]* section of con
 Returns *true* if '$token' matches any tokens generated previously for the user with *generateRequestToken()*.
 Returns *false* if the token has timed out (exceeded the *ttl*) or does not match.
 Once a token has been used once it is removed from the database and subsequent attempts to verify it will return *false*.
+
+
+=== Instance methods
+
+==== getID() : int
+
+Returns the unique *id* of the user.
+
+
+==== getRegisterTime() : int
+
+Returns a UNIX timestamp of the time the user was added to the database.
 
 
 ==== remove() : void
