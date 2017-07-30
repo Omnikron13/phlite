@@ -89,7 +89,7 @@ Returns *false* if '$email' is an email in use already in the database, otherwis
 
 === Password
 
-==== setPassword(string $password) : void
+==== $user->setPassword(string $password) : void
 
 Updates the user's *password* in the database.
 The password is currently always hashed with the 'BCRYPT' algorithm with the cost being controlled by the *password_hash_cost* config parameter under the *[user]* section.
@@ -97,12 +97,12 @@ Throws a *UserException* with code *106* if '$password' is invalid.
 See *validPassword()* for more details.
 
 
-==== checkPassword(string $password) : bool
+==== $user->checkPassword(string $password) : bool
 
 Returns *true* if '$password' matches the stored hash, *false* otherwise.
 
 
-==== validPassword(string $password) : bool
+==== User::validPassword(string $password) : bool
 
 Returns *true* if '$password' is a valid password, otherwise *false*.
 Validity is determined by a regex loaded from the *password_regex* parameter in the *[user]* section of config files.
