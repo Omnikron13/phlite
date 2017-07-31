@@ -70,7 +70,9 @@ class Session {
         if(!isset($_COOKIE['session']))
             return NULL;
         $idkey = explode(':', $_COOKIE['session']);
-        $s = new self($idkey[0]);
+        $s = self::getByID($idkey[0]);
+        if($s === NULL)
+            return NULL;
         if(!$s->check($idkey[1]))
             return NULL;
         return $s;
