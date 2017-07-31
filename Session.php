@@ -76,6 +76,16 @@ class Session {
         return $s;
     }
 
+    public static function getByID(int $i) : ?self {
+        try{
+            $s = new self($i);
+        }
+        catch(SessionException $e) {
+            return NULL;
+        }
+        return $s;
+    }
+
     public static function start(User $u) : string {
         self::free($u);
         $key = self::generateKey();
