@@ -98,8 +98,8 @@ class User {
             throw new UserException(UserException::CODE['EMAIL_UNAVAILABLE']);
         $sql = 'UPDATE users SET email = :e WHERE id = :i';
         $q = DB::prepare($sql);
-        $q->bindValue(':e', $e, PDO::PARAM_STR);
-        $q->bindValue(':i', $i, PDO::PARAM_INT);
+        $q->bindValue(':e', $e,             PDO::PARAM_STR);
+        $q->bindValue(':i', $this->getID(), PDO::PARAM_INT);
         $q->execute();
         $this->email = $e;
     }
