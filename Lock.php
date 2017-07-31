@@ -125,6 +125,16 @@ class Lock {
         return $l;
     }
 
+    public static function getByID(int $i) : ?self {
+        try{
+            $l = new self($i);
+        }
+        catch(LockException $e) {
+            return NULL;
+        }
+        return $l;
+    }
+
     /******************
      * Key management *
      ******************/
