@@ -65,8 +65,8 @@ class User {
             throw new UserException(UserException::CODE['USERNAME_UNAVAILABLE']);
         $sql = 'UPDATE users SET username = :u WHERE id = :i';
         $q = DB::prepare($sql);
-        $q->bindValue(':u', $u, PDO::PARAM_STR);
-        $q->bindValue(':i', $i, PDO::PARAM_INT);
+        $q->bindValue(':u', $u,             PDO::PARAM_STR);
+        $q->bindValue(':i', $this->getID(), PDO::PARAM_INT);
         $q->execute();
         $this->username = $u;
     }
