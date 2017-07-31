@@ -315,6 +315,11 @@ for more details.
 Returns an array of *Group* objects representing all groups in the database.
 
 
+==== getByID(int $id) : ?Group
+
+Returns a *Group* representing the group referenced by '$id', or *NULL* if no group with that id found.
+
+
 //TODO: move this if it gets changed to User->getGroups() in source
 ==== getUserGroups(User $user) : array
 
