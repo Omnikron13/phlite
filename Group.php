@@ -174,6 +174,16 @@ class Group {
         return $g;
     }
 
+    public static function getByID(int $i) : ?self {
+        try{
+            $g = new self($i);
+        }
+        catch(GroupException $e) {
+            return NULL;
+        }
+        return $g;
+    }
+
     //TODO: consider moving this to User->getGroups()
     public static function getUserGroups(User $u) : array {
         $sql = 'SELECT groupID FROM groups_members WHERE userID = :u';
