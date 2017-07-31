@@ -126,8 +126,8 @@ class User {
         $p = self::hashPassword($p);
         $sql = 'UPDATE users SET password = :p WHERE id = :i';
         $q = DB::prepare($sql);
-        $q->bindValue(':p', $p, PDO::PARAM_STR);
-        $q->bindValue(':i', $i, PDO::PARAM_INT);
+        $q->bindValue(':p', $p,             PDO::PARAM_STR);
+        $q->bindValue(':i', $this->getID(), PDO::PARAM_INT);
         $q->execute();
         $this->password = $p;
     }
