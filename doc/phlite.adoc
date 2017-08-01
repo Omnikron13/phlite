@@ -458,6 +458,11 @@ for more details.
 Returns an array of *Lock* objects representing all locks in the database.
 
 
+==== getByID(int $id) : ?Lock
+
+Returns a *Lock* representing the lock referenced by '$id', or *NULL* if no lock with that id found.
+
+
 ==== validName(string $name) : bool
 
 Returns *true* if '$name' is a valid lock name, otherwise *false*.
