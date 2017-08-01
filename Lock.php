@@ -165,6 +165,15 @@ class Lock {
         $q->execute();
     }
 
+    //TODO: document
+    public function getGroups() : array {
+        $sql = 'SELECT groupID FROM locks_group_keys WHERE lockID = :l';
+        $q = DB::prepare($sql);
+        $q->bindValue(':l', $this->id, PDO::PARAM_INT);
+        $q->execute();
+        return $q->fetchAll(PDO::FETCH_FUNC, ['Phlite\Group', 'getByID']);
+    }
+
     public function grantUserKey(User $u) : void {
         if($this->checkUserKey($u))
             return;
