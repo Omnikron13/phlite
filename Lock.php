@@ -209,6 +209,21 @@ class Lock {
         $q->execute();
     }
 
+    //TODO: document
+    public function getUsers(bool $includeGroups = false) : array {
+        $sql = 'SELECT userID FROM locks_user_keys WHERE lockID = :l';
+        $q = DB::prepare($sql);
+        $q->bindValue(':l', $this->id, PDO::PARAM_INT);
+        $q->execute();
+        $users = $q->fetchAll(PDO::FETCH_FUNC, ['Phlite\User', 'getByID']);
+        if(!$includeGroups)
+            return $users;
+        foreach($this->getGroups() as $g) {
+            $users = array_merge($users, $g->getMembers());
+        }
+        return array_unique($users);
+    }
+
     /************
      * Database *
      ************/
