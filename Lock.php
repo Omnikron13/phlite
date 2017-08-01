@@ -175,7 +175,7 @@ class Lock {
     }
 
     public function grantUserKey(User $u) : void {
-        if($this->checkUserKey($u))
+        if($this->checkUserKey($u, false))
             return;
         $sql = 'INSERT INTO locks_user_keys(lockID, userID) VALUES(:l, :u)';
         $q = DB::prepare($sql);
