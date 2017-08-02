@@ -1,5 +1,6 @@
 = PHLITE(7)
 :doctype: manpage
+:compat-mode:
 :man manual: Phlite Manual
 //left alignment fails with asciidoc, requiring asciidoctor
 :toc: left
