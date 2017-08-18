@@ -271,12 +271,7 @@ Validity is determined by a regex loaded from the *name_regex* parameter in the 
 Returns *false* if '$name' is a group name in use already in the database, otherwise *true*.
 
 
-=== Instance methods
-
-==== getID() : int
-
-Returns the unique *id* of the group.
-
+=== Description
 
 ==== getDescription() : string
 
@@ -288,6 +283,19 @@ Returns the *description* of the group.
 Updates the group's *description* in the database.
 Throws a *GroupException* with code *204* if '$description' is invalid.
 See *validDescription()* for more details.
+
+
+==== validDescription(string $description) : bool
+
+Returns *true* if '$description' is a valid group description, otherwise *false*.
+Validity is determined by a regex loaded from the *description_regex* parameter in the *[group]* section of config files.
+
+
+=== Instance methods
+
+==== getID() : int
+
+Returns the unique *id* of the group.
 
 
 ==== addMember(User $user) : void
@@ -353,12 +361,6 @@ Returns a *Group* representing the group referenced by '$id', or *NULL* if no gr
 ==== getUserGroups(User $user) : array
 
 Returns an array of *Group* objects representing all groups which '$user' is a member of.
-
-
-==== validDescription(string $description) : bool
-
-Returns *true* if '$description' is a valid group description, otherwise *false*.
-Validity is determined by a regex loaded from the *description_regex* parameter in the *[group]* section of config files.
 
 
 ==== setupDB() : void
