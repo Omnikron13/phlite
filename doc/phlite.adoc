@@ -378,10 +378,6 @@ tables from the following schema files:
 * 'sql/groups_members.sql'
 
 
-=== Instance methods
-
-=== Static methods
-
 ////////////////////
 // TODO: Lock API //
 ////////////////////
