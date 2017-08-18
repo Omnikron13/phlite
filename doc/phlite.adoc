@@ -248,12 +248,12 @@ tables from the following schema files:
 
 === Name
 
-==== getName() : string
+==== $group->getName() : string
 
 Returns the *name* of the group.
 
 
-==== setName(string $name) : void
+==== $group->setName(string $name) : void
 
 Updates the group's *name* in the database.
 Throws a *GroupException* with code *202* if '$name' is invalid, *203* if unavailable.
@@ -273,12 +273,12 @@ Returns *false* if '$name' is a group name in use already in the database, other
 
 === Description
 
-==== getDescription() : string
+==== $group->getDescription() : string
 
 Returns the *description* of the group.
 
 
-==== setDescription(string $description) : void
+==== $group->setDescription(string $description) : void
 
 Updates the group's *description* in the database.
 Throws a *GroupException* with code *204* if '$description' is invalid.
@@ -293,7 +293,7 @@ Validity is determined by a regex loaded from the *description_regex* parameter 
 
 === Misc
 
-==== getID() : int
+==== $group->getID() : int
 
 Returns the unique *id* of the group.
 
@@ -322,7 +322,7 @@ See
 for more details.
 
 
-==== remove() : void
+==== $group->remove() : void
 
 Removes the group from the database.
 
@@ -345,22 +345,22 @@ Returns an array of *Group* objects representing all groups which '$user' is a m
 
 === Member Management
 
-==== addMember(User $user) : void
+==== $group->addMember(User $user) : void
 
 Adds '$user' to the group in the database.
 
 
-==== getMembers() : array
+==== $group->getMembers() : array
 
 Returns an array of *User* objects representing the group's members.
 
 
-==== containsMember(User $user) : bool
+==== $group->containsMember(User $user) : bool
 
 Returns *true* if group contains '$user', otherwise *false*.
 
 
-==== removeMember(User $user) : void
+==== $group->removeMember(User $user) : void
 
 Removes '$user' from the group in the database.
 
