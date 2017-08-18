@@ -461,7 +461,7 @@ The *Lock* constructor accepts the *id* of a lock in the database as '$id'.
 If no lock with that id can be found it will throw a *LockException* with code *301*.
 
 
-==== add(string $name, ?string $description = NULL) : Lock
+==== Lock::add(string $name, ?string $description = NULL) : Lock
 
 Attempts to add a new lock to the database with the '$name' and '$description' provided, returning a *Lock* object representing the new lock.
 Throws a *LockException* on failure with one of the following codes:
@@ -477,34 +477,34 @@ See
 for more details.
 
 
-==== getAll() : array
+==== Lock::getAll() : array
 
 Returns an array of *Lock* objects representing all locks in the database.
 
 
-==== getByID(int $id) : ?Lock
+==== Lock::getByID(int $id) : ?Lock
 
 Returns a *Lock* representing the lock referenced by '$id', or *NULL* if no lock with that id found.
 
 
-==== validName(string $name) : bool
+==== Lock::validName(string $name) : bool
 
 Returns *true* if '$name' is a valid lock name, otherwise *false*.
 Validity is determined by a regex loaded from the *name_regex* parameter in the *[lock]* section of config files.
 
 
-==== availableName(string $name) : bool
+==== Lock::availableName(string $name) : bool
 
 Returns *false* if '$name' is a lock name in use already in the database, otherwise *true*.
 
 
-==== validDescription(string $description) : bool
+==== Lock::validDescription(string $description) : bool
 
 Returns *true* if '$description' is a valid lock description, otherwise *false*.
 Validity is determined by a regex loaded from the *description_regex* parameter in the *[lock]* section of config files.
 
 
-==== setupDB() : void
+==== Lock::setupDB() : void
 
 Loads database schemas for the
 *locks*,
