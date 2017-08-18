@@ -246,21 +246,11 @@ tables from the following schema files:
 
 == Group API
 
-=== Instance methods
-
-==== getID() : int
-
-Returns the unique *id* of the group.
-
+=== Name
 
 ==== getName() : string
 
 Returns the *name* of the group.
-
-
-==== getDescription() : string
-
-Returns the *description* of the group.
 
 
 ==== setName(string $name) : void
@@ -268,6 +258,29 @@ Returns the *description* of the group.
 Updates the group's *name* in the database.
 Throws a *GroupException* with code *202* if '$name' is invalid, *203* if unavailable.
 See *validName()* & *availableName()* for more details.
+
+
+==== validName(string $name) : bool
+
+Returns *true* if '$name' is a valid group name, otherwise *false*.
+Validity is determined by a regex loaded from the *name_regex* parameter in the *[group]* section of config files.
+
+
+==== availableName(string $name) : bool
+
+Returns *false* if '$name' is a group name in use already in the database, otherwise *true*.
+
+
+=== Instance methods
+
+==== getID() : int
+
+Returns the unique *id* of the group.
+
+
+==== getDescription() : string
+
+Returns the *description* of the group.
 
 
 ==== setDescription(string $description) : void
@@ -340,17 +353,6 @@ Returns a *Group* representing the group referenced by '$id', or *NULL* if no gr
 ==== getUserGroups(User $user) : array
 
 Returns an array of *Group* objects representing all groups which '$user' is a member of.
-
-
-==== validName(string $name) : bool
-
-Returns *true* if '$name' is a valid group name, otherwise *false*.
-Validity is determined by a regex loaded from the *name_regex* parameter in the *[group]* section of config files.
-
-
-==== availableName(string $name) : bool
-
-Returns *false* if '$name' is a group name in use already in the database, otherwise *true*.
 
 
 ==== validDescription(string $description) : bool
