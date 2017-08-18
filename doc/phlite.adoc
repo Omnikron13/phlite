@@ -108,6 +108,18 @@ Returns *true* if '$password' is a valid password, otherwise *false*.
 Validity is determined by a regex loaded from the *password_regex* parameter in the *[user]* section of config files.
 
 
+=== Misc
+
+==== getID() : int
+
+Returns the unique *id* of the user.
+
+
+==== getRegisterTime() : int
+
+Returns a UNIX timestamp of the time the user was added to the database.
+
+
 === Login
 
 ==== User::login(string $username, string $password) : array
@@ -233,16 +245,6 @@ tables from the following schema files:
 
 
 === Instance methods
-
-==== getID() : int
-
-Returns the unique *id* of the user.
-
-
-==== getRegisterTime() : int
-
-Returns a UNIX timestamp of the time the user was added to the database.
-
 
 == Group API
 
