@@ -365,9 +365,7 @@ Returns *true* if group contains '$user', otherwise *false*.
 Removes '$user' from the group in the database.
 
 
-=== Instance methods
-
-=== Static methods
+=== Database
 
 ==== setupDB() : void
 
@@ -379,6 +377,10 @@ tables from the following schema files:
 * 'sql/groups.sql'
 * 'sql/groups_members.sql'
 
+
+=== Instance methods
+
+=== Static methods
 
 ////////////////////
 // TODO: Lock API //
