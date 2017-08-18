@@ -291,12 +291,14 @@ Returns *true* if '$description' is a valid group description, otherwise *false*
 Validity is determined by a regex loaded from the *description_regex* parameter in the *[group]* section of config files.
 
 
-=== Instance methods
+=== Misc
 
 ==== getID() : int
 
 Returns the unique *id* of the group.
 
+
+=== Instance methods
 
 ==== addMember(User $user) : void
 
