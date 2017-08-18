@@ -244,8 +244,6 @@ tables from the following schema files:
 * 'sql/users_request_tokens.sql'
 
 
-=== Instance methods
-
 == Group API
 
 === Instance methods
