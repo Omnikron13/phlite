@@ -260,13 +260,13 @@ Throws a *GroupException* with code *202* if '$name' is invalid, *203* if unavai
 See *validName()* & *availableName()* for more details.
 
 
-==== validName(string $name) : bool
+==== Group::validName(string $name) : bool
 
 Returns *true* if '$name' is a valid group name, otherwise *false*.
 Validity is determined by a regex loaded from the *name_regex* parameter in the *[group]* section of config files.
 
 
-==== availableName(string $name) : bool
+==== Group::availableName(string $name) : bool
 
 Returns *false* if '$name' is a group name in use already in the database, otherwise *true*.
 
@@ -285,7 +285,7 @@ Throws a *GroupException* with code *204* if '$description' is invalid.
 See *validDescription()* for more details.
 
 
-==== validDescription(string $description) : bool
+==== Group::validDescription(string $description) : bool
 
 Returns *true* if '$description' is a valid group description, otherwise *false*.
 Validity is determined by a regex loaded from the *description_regex* parameter in the *[group]* section of config files.
@@ -306,7 +306,7 @@ The *Group* constructor accepts the *id* of a group in the database as '$id'.
 If no group with that id can be found it will throw a *GroupException* with code *201*.
 
 
-==== add(string $name, ?string $description = NULL) : Group
+==== Group::add(string $name, ?string $description = NULL) : Group
 
 Attempts to add a new group to the database with the '$name' and '$description' provided, returning a *Group* object representing the new group.
 Throws a *GroupException* on failute with one of the following codes:
@@ -327,18 +327,18 @@ for more details.
 Removes the group from the database.
 
 
-==== getAll() : array
+==== Group::getAll() : array
 
 Returns an array of *Group* objects representing all groups in the database.
 
 
-==== getByID(int $id) : ?Group
+==== Group::getByID(int $id) : ?Group
 
 Returns a *Group* representing the group referenced by '$id', or *NULL* if no group with that id found.
 
 
 //TODO: move this if it gets changed to User->getGroups() in source
-==== getUserGroups(User $user) : array
+==== Group::getUserGroups(User $user) : array
 
 Returns an array of *Group* objects representing all groups which '$user' is a member of.
 
@@ -367,7 +367,7 @@ Removes '$user' from the group in the database.
 
 === Database
 
-==== setupDB() : void
+==== Group::setupDB() : void
 
 Loads database schemas for the
 *groups* &
