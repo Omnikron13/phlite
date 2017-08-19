@@ -4,6 +4,7 @@ v0.0.1
 :doctype: manpage
 :compat-mode:
 :manmanual: Phlite Manual
+:mansource: Phlite
 //left alignment fails with asciidoc, requiring asciidoctor
 :toc: left
 //3 levels might be preferable, but produces too large a toc without left alignment
