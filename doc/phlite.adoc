@@ -37,6 +37,13 @@ These classes likely do not need to be used directly.
 
 == User API
 
+=== ID
+
+==== getID() : int
+
+Returns the unique *id* of the user.
+
+
 === Username
 
 ==== $user->getUsername() : string
@@ -109,11 +116,6 @@ Validity is determined by a regex loaded from the *password_regex* parameter in 
 
 
 === Misc
-
-==== getID() : int
-
-Returns the unique *id* of the user.
-
 
 ==== getRegisterTime() : int
 
