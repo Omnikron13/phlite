@@ -248,6 +248,13 @@ tables from the following schema files:
 
 == Group API
 
+=== ID
+
+==== $group->getID() : int
+
+Returns the unique *id* of the group.
+
+
 === Name
 
 ==== $group->getName() : string
@@ -291,13 +298,6 @@ See *validDescription()* for more details.
 
 Returns *true* if '$description' is a valid group description, otherwise *false*.
 Validity is determined by a regex loaded from the *description_regex* parameter in the *[group]* section of config files.
-
-
-=== Misc
-
-==== $group->getID() : int
-
-Returns the unique *id* of the group.
 
 
 === Group Management
