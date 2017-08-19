@@ -525,10 +525,6 @@ tables from the following schema files:
 * 'sql/locks_user_keys.sql'
 
 
-=== Instance methods
-
-=== Static methods
-
 == Exceptions
 
 .UserException
