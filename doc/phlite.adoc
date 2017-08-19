@@ -385,6 +385,13 @@ tables from the following schema files:
 ////////////////////
 == Lock API
 
+=== ID
+
+==== $lock->getID() : int
+
+Returns the unique *id* of the lock.
+
+
 === Name
 
 ==== $lock->getName() : string
@@ -428,13 +435,6 @@ See *validDescription()* for more details.
 
 Returns *true* if '$description' is a valid lock description, otherwise *false*.
 Validity is determined by a regex loaded from the *description_regex* parameter in the *[lock]* section of config files.
-
-
-=== Misc
-
-==== $lock->getID() : int
-
-Returns the unique *id* of the lock.
 
 
 === Lock Management
