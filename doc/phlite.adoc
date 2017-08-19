@@ -1,4 +1,6 @@
 = PHLITE(7)
+Joey Sabey <GameFreak7744@gmail.com>
+v0.0.1
 :doctype: manpage
 :compat-mode:
 :man manual: Phlite Manual
