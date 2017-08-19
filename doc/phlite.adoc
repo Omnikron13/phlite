@@ -383,12 +383,7 @@ tables from the following schema files:
 ////////////////////
 == Lock API
 
-=== Instance methods
-
-==== $lock->getID() : int
-
-Returns the unique *id* of the lock.
-
+=== Name
 
 ==== $lock->getName() : string
 
@@ -400,6 +395,24 @@ Returns the *name* of the lock.
 Updates the lock's *name* in the database.
 Throws a *LockException* with code *302* if '$name' is invalid, code *303* if unavailable.
 See *validName()* & *availableName()* for more details.
+
+
+==== Lock::validName(string $name) : bool
+
+Returns *true* if '$name' is a valid lock name, otherwise *false*.
+Validity is determined by a regex loaded from the *name_regex* parameter in the *[lock]* section of config files.
+
+
+==== Lock::availableName(string $name) : bool
+
+Returns *false* if '$name' is a lock name in use already in the database, otherwise *true*.
+
+
+=== Instance methods
+
+==== $lock->getID() : int
+
+Returns the unique *id* of the lock.
 
 
 ==== $lock->getDescription() : string
@@ -485,17 +498,6 @@ Returns an array of *Lock* objects representing all locks in the database.
 ==== Lock::getByID(int $id) : ?Lock
 
 Returns a *Lock* representing the lock referenced by '$id', or *NULL* if no lock with that id found.
-
-
-==== Lock::validName(string $name) : bool
-
-Returns *true* if '$name' is a valid lock name, otherwise *false*.
-Validity is determined by a regex loaded from the *name_regex* parameter in the *[lock]* section of config files.
-
-
-==== Lock::availableName(string $name) : bool
-
-Returns *false* if '$name' is a lock name in use already in the database, otherwise *true*.
 
 
 ==== Lock::validDescription(string $description) : bool
