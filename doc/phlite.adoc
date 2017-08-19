@@ -428,12 +428,14 @@ Returns *true* if '$description' is a valid lock description, otherwise *false*.
 Validity is determined by a regex loaded from the *description_regex* parameter in the *[lock]* section of config files.
 
 
-=== Instance methods
+=== Misc
 
 ==== $lock->getID() : int
 
 Returns the unique *id* of the lock.
 
+
+=== Instance methods
 
 ==== $lock->grantGroupKey(Group $group) : void
 
