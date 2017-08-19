@@ -510,9 +510,7 @@ Returns *false* otherwise.
 Removes the \'key' for this lock registered for '$user' in the 'locks_user_keys' table in the database (if one exists).
 
 
-=== Instance methods
-
-=== Static methods
+=== Database
 
 ==== Lock::setupDB() : void
 
@@ -526,6 +524,10 @@ tables from the following schema files:
 * 'sql/locks_group_keys.sql'
 * 'sql/locks_user_keys.sql'
 
+
+=== Instance methods
+
+=== Static methods
 
 == Exceptions
 
