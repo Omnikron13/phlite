@@ -435,6 +435,45 @@ Validity is determined by a regex loaded from the *description_regex* parameter 
 Returns the unique *id* of the lock.
 
 
+=== Lock Management
+
+==== __construct(int $id)
+
+The *Lock* constructor accepts the *id* of a lock in the database as '$id'.
+If no lock with that id can be found it will throw a *LockException* with code *301*.
+
+
+==== Lock::add(string $name, ?string $description = NULL) : Lock
+
+Attempts to add a new lock to the database with the '$name' and '$description' provided, returning a *Lock* object representing the new lock.
+Throws a *LockException* on failure with one of the following codes:
+
+* *302* - invalid lock name
+* *303* - unavailable lock name
+* *304* - invalid lock description
+
+See
+*validName()*,
+*availableName()* &
+*validDescription()*
+for more details.
+
+
+==== $lock->remove() : void
+
+Removes the lock from the database.
+
+
+==== Lock::getAll() : array
+
+Returns an array of *Lock* objects representing all locks in the database.
+
+
+==== Lock::getByID(int $id) : ?Lock
+
+Returns a *Lock* representing the lock referenced by '$id', or *NULL* if no lock with that id found.
+
+
 === Instance methods
 
 ==== $lock->grantGroupKey(Group $group) : void
@@ -471,44 +510,7 @@ Returns *false* otherwise.
 Removes the \'key' for this lock registered for '$user' in the 'locks_user_keys' table in the database (if one exists).
 
 
-==== $lock->remove() : void
-
-Removes the lock from the database.
-
-
 === Static methods
-
-==== __construct(int $id)
-
-The *Lock* constructor accepts the *id* of a lock in the database as '$id'.
-If no lock with that id can be found it will throw a *LockException* with code *301*.
-
-
-==== Lock::add(string $name, ?string $description = NULL) : Lock
-
-Attempts to add a new lock to the database with the '$name' and '$description' provided, returning a *Lock* object representing the new lock.
-Throws a *LockException* on failure with one of the following codes:
-
-* *302* - invalid lock name
-* *303* - unavailable lock name
-* *304* - invalid lock description
-
-See
-*validName()*,
-*availableName()* &
-*validDescription()*
-for more details.
-
-
-==== Lock::getAll() : array
-
-Returns an array of *Lock* objects representing all locks in the database.
-
-
-==== Lock::getByID(int $id) : ?Lock
-
-Returns a *Lock* representing the lock referenced by '$id', or *NULL* if no lock with that id found.
-
 
 ==== Lock::setupDB() : void
 
