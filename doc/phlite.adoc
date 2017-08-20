@@ -35,6 +35,8 @@ Additional utility & low level functionality is provided by the *Base64*, *Cooki
 These classes likely do not need to be used directly.
 
 
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
 == User API
 
 === ID
@@ -246,6 +248,8 @@ tables from the following schema files:
 * 'sql/users_request_tokens.sql'
 
 
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
 == Group API
 
 === ID
@@ -383,6 +387,8 @@ tables from the following schema files:
 ////////////////////
 // TODO: Lock API //
 ////////////////////
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
 == Lock API
 
 === ID
@@ -527,6 +533,8 @@ tables from the following schema files:
 * 'sql/locks_user_keys.sql'
 
 
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
 == Exceptions
 
 .UserException
@@ -579,6 +587,8 @@ tables from the following schema files:
 |501  |TOKEN_NOT_FOUND      |Request token not found
 |======================================================
 
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 == COPYRIGHT
 
