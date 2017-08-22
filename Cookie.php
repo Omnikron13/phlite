@@ -1,7 +1,7 @@
 <?php
 namespace Phlite;
 
-require_once 'Config.php';
+require_once __DIR__.'/Config.php';
 
 class Cookie {
     public static function send(string $k, ?string $v, ?int $d = NULL) : void {

@@ -3,10 +3,10 @@ namespace Phlite;
 
 use PDO;
 
-require_once 'DB.php';
-require_once 'Group.php';
-require_once 'User.php';
-require_once 'PhliteException.php';
+require_once __DIR__.'/DB.php';
+require_once __DIR__.'/Group.php';
+require_once __DIR__.'/User.php';
+require_once __DIR__.'/PhliteException.php';
 
 class Lock {
     protected $id         = NULL;

@@ -1,7 +1,7 @@
 <?php
 namespace Phlite;
 
-require_once "Config.php";
+require_once __DIR__.'/Config.php';
 
 use PDO;
 use PDOStatement;

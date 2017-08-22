@@ -3,12 +3,12 @@ namespace Phlite;
 
 use PDO;
 
-require_once 'Config.php';
-require_once 'DB.php';
-require_once 'User.php';
-require_once 'Base64.php';
-require_once 'Cookie.php';
-require_once 'PhliteException.php';
+require_once __DIR__.'/Config.php';
+require_once __DIR__.'/DB.php';
+require_once __DIR__.'/User.php';
+require_once __DIR__.'/Base64.php';
+require_once __DIR__.'/Cookie.php';
+require_once __DIR__.'/PhliteException.php';
 
 class Session {
     protected $id     = NULL;
