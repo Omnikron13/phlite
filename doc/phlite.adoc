@@ -384,9 +384,6 @@ tables from the following schema files:
 * 'sql/groups_members.sql'
 
 
-////////////////////
-// TODO: Lock API //
-////////////////////
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 == Lock API
