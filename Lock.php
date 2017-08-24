@@ -208,7 +208,6 @@ class Lock {
         $q->execute();
     }
 
-    //TODO: document
     public function getUsers(bool $includeGroups = false) : array {
         $sql = 'SELECT userID FROM locks_user_keys WHERE lockID = :l';
         $q = DB::prepare($sql);
