@@ -165,7 +165,6 @@ class Lock {
         $q->execute();
     }
 
-    //TODO: document
     public function getGroups() : array {
         $sql = 'SELECT groupID FROM locks_group_keys WHERE lockID = :l';
         $q = DB::prepare($sql);
