@@ -563,6 +563,11 @@ Please note however that *Config::load()* should obviously be called 'before' th
 Returns a 'PDO' object allowing access to the database.
 
 
+==== DB::prepare(string $sql) : PDOStatement
+
+Convenience method to prepare an SQL statement for the database.
+
+
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 == Exceptions
