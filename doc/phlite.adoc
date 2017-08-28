@@ -568,6 +568,12 @@ Returns a 'PDO' object allowing access to the database.
 Convenience method to prepare an SQL statement for the database.
 
 
+==== DB::exec(string $sql) : int
+
+Convenience method to execute an SQL statement which does not expect any returned data on the database.
+Implemented as a pass-through to an *exec()* call on the underlying 'PDO' object representing the database, including the returned integer.
+
+
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 == Exceptions
