@@ -545,6 +545,19 @@ tables from the following schema files:
 
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
+== Miscellaneous API
+
+=== Top-level Functions
+
+==== setupDB() : void
+
+This function will create all database tables, indexes, etc. that are required by 'Phlite' by calling the *setupDB()* static methods of necessary classes.
+As such this function needs to be called once to initalise the database before most methods will function.
+Please note however that *Config::load()* should obviously be called 'before' this function so the database path will be correct.
+
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
 == Exceptions
 
 .UserException
