@@ -556,6 +556,13 @@ As such this function needs to be called once to initalise the database before m
 Please note however that *Config::load()* should obviously be called 'before' this function so the database path will be correct.
 
 
+=== DB API
+
+==== DB::get() : PDO
+
+Returns a 'PDO' object allowing access to the database.
+
+
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 == Exceptions
