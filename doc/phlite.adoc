@@ -610,6 +610,12 @@ Other config parameters which control cookies are
 Note that as this method sends headers it must be called before output to function.
 
 
+==== Cookie::clear(string $key) : void
+
+Clears the cookie identified by '$key'.
+Note that as this method sends headers it must be called before output to function.
+
+
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 == Exceptions
