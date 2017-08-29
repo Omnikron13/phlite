@@ -590,6 +590,11 @@ If '$file' is set to *NULL* (and no config is already loaded) then 'defaults.cfg
 You do not have to call the method this way yourself.
 
 
+==== Config::get(string $section, string $param) : mixed
+
+Returns the value of the config parameter specified by '$param' from the section specified by '$section'.
+
+
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 == Exceptions
