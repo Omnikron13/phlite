@@ -623,6 +623,11 @@ Note that as this method sends headers it must be called before output to functi
 Encodes a string in the 'base64url' format (as described by RFC 4648).
 
 
+==== Base64::decode(string $s) : string
+
+Decodes a string that has been encoded in the 'base64url' format (as described by RFC 4648).
+
+
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 == Exceptions
