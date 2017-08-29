@@ -595,6 +595,21 @@ You do not have to call the method this way yourself.
 Returns the value of the config parameter specified by '$param' from the section specified by '$section'.
 
 
+=== Cookie API
+
+==== Cookie::send(string $key, ?string $value, ?int $duration = NULL) : void
+
+Sends out a cookie keyed by '$key' with a value of '$value'.
+The '$duration' parameter defines how long (in seconds, from now) the cookie remains valid.
+If '$duration' is *NULL* then the duration is defined by the *default_ttl* parameter in the *[cookie]* section of config files.
+Other config parameters which control cookies are
+*path*,
+*domain*,
+*secure* &
+*http_only*.
+Note that as this method sends headers it must be called before output to function.
+
+
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 == Exceptions
