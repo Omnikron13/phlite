@@ -579,6 +579,17 @@ Implemented as a pass-through to an *exec()* call on the underlying 'PDO' object
 Reads the file specified by '$file' (which may be anywhere in the include path) and passes it through to *DB::exec()*.
 
 
+=== Config API
+
+==== Config::load(?string $file = NULL) : void
+
+Loads configuration parameters from the file identified by '$file' (which may reside anywhere in the include path).
+Note that the default parameters from 'defaults.cfg' will be loaded first, and calls to this method patch over those defaults, allowing for partial (and perhaps multiple) config files.
+
+If '$file' is set to *NULL* (and no config is already loaded) then 'defaults.cfg' will be loaded, but nothing else is done.
+You do not have to call the method this way yourself.
+
+
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 == Exceptions
