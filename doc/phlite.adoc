@@ -616,6 +616,13 @@ Clears the cookie identified by '$key'.
 Note that as this method sends headers it must be called before output to function.
 
 
+=== Base64 API
+
+==== Base64::encode(string $s) : string
+
+Encodes a string in the 'base64url' format (as described by RFC 4648).
+
+
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 == Exceptions
