@@ -574,6 +574,11 @@ Convenience method to execute an SQL statement which does not expect any returne
 Implemented as a pass-through to an *exec()* call on the underlying 'PDO' object representing the database, including the returned integer.
 
 
+==== DB::execFile(string $file) : int
+
+Reads the file specified by '$file' (which may be anywhere in the include path) and passes it through to *DB::exec()*.
+
+
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 == Exceptions
