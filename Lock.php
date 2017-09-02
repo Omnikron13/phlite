@@ -26,6 +26,10 @@ class Lock {
             throw new LockException(LockException::CODE['LOCK_NOT_FOUND']);
     }
 
+    public function __toString() : string {
+        return $this->name;
+    }
+
     public function getID() : int {
         return $this->id;
     }
