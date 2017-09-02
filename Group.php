@@ -108,7 +108,7 @@ class Group {
         $q = DB::prepare($sql);
         $q->bindValue(':i', $this->id, PDO::PARAM_INT);
         $q->execute();
-        return $q->fetchAll(PDO::FETCH_FUNC, ['Phlite\User', 'getByID']);
+        return $q->fetchAll(PDO::FETCH_FUNC, [User::class, 'getByID']);
     }
 
     public function containsMember(User $u) : bool {

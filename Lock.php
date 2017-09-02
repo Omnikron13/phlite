@@ -191,7 +191,7 @@ class Lock {
         $q = DB::prepare($sql);
         $q->bindValue(':l', $this->id, PDO::PARAM_INT);
         $q->execute();
-        return $q->fetchAll(PDO::FETCH_FUNC, ['Phlite\Group', 'getByID']);
+        return $q->fetchAll(PDO::FETCH_FUNC, [Group::class, 'getByID']);
     }
 
     public function grantUserKey(User $u) : void {
@@ -234,7 +234,7 @@ class Lock {
         $q = DB::prepare($sql);
         $q->bindValue(':l', $this->id, PDO::PARAM_INT);
         $q->execute();
-        $users = $q->fetchAll(PDO::FETCH_FUNC, ['Phlite\User', 'getByID']);
+        $users = $q->fetchAll(PDO::FETCH_FUNC, [User::class, 'getByID']);
         if(!$includeGroups)
             return $users;
         foreach($this->getGroups() as $g) {
