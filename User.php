@@ -299,14 +299,7 @@ class User {
         $sql = 'SELECT id FROM users';
         $q = DB::prepare($sql);
         $q->execute();
-        $u = $q->fetchAll(PDO::FETCH_COLUMN, 0);
-        $u = array_map(
-            function(int $i) {
-                return new User($i);
-            },
-            $u
-        );
-        return $u;
+        return $q->fetchAll(PDO::FETCH_FUNC, [self::class, 'getByID']);
     }
 
     public static function getByID(int $i) : ?self {

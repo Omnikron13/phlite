@@ -157,14 +157,7 @@ class Group {
         $sql = 'SELECT id FROM groups';
         $q = DB::prepare($sql);
         $q->execute();
-        $g = $q->fetchAll(PDO::FETCH_COLUMN, 0);
-        $g = array_map(
-            function(int $i) {
-                return new Group($i);
-            },
-            $g
-        );
-        return $g;
+        return $q->fetchAll(PDO::FETCH_FUNC, [self::class, 'getByID']);
     }
 
     public static function getByID(int $i) : ?self {
@@ -183,14 +176,7 @@ class Group {
         $q = DB::prepare($sql);
         $q->bindValue(':u', $u->getID(), PDO::PARAM_INT);
         $q->execute();
-        $g = $q->fetchAll(PDO::FETCH_COLUMN, 0);
-        $g = array_map(
-            function(int $i) {
-                return new Group($i);
-            },
-            $g
-        );
-        return $g;
+        return $q->fetchAll(PDO::FETCH_FUNC, [self::class, 'getByID']);
     }
 
     /************
