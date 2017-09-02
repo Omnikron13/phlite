@@ -148,6 +148,21 @@ class Lock {
         return $q->fetchAll(PDO::FETCH_FUNC, [self::class, 'getByID']);
     }
 
+    //TODO: document
+    public static function getByUser(User $u, bool $includeGroups = true) : array {
+        $sql = 'SELECT lockID FROM locks_user_keys WHERE userID = :u';
+        $q = DB::prepare($sql);
+        $q->bindValue(':u', $u->getID(), PDO::PARAM_INT);
+        $q->execute();
+        $l = $q->fetchAll(PDO::FETCH_FUNC, [self::class, 'getByID']);
+        if(!$includeGroups)
+            return $l;
+        foreach(Group::getByUser($u) as $g) {
+            $l = array_merge($l, self::getByGroup($g));
+        }
+        return array_unique($l);
+    }
+
     /******************
      * Key management *
      ******************/
