@@ -178,7 +178,7 @@ class Group {
     }
 
     //TODO: consider moving this to User->getGroups()
-    public static function getUserGroups(User $u) : array {
+    public static function getByUser(User $u) : array {
         $sql = 'SELECT groupID FROM groups_members WHERE userID = :u';
         $q = DB::prepare($sql);
         $q->bindValue(':u', $u->getID(), PDO::PARAM_INT);

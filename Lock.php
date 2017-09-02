@@ -193,7 +193,7 @@ class Lock {
             return true;
         if(!$checkGroups)
             return false;
-        foreach(Group::getUserGroups($u) as $g) {
+        foreach(Group::getByUser($u) as $g) {
             if($this->checkGroupKey($g))
                 return true;
         }

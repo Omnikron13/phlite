@@ -346,7 +346,7 @@ Returns a *Group* representing the group referenced by '$id', or *NULL* if no gr
 
 
 //TODO: move this if it gets changed to User->getGroups() in source
-==== Group::getUserGroups(User $user) : array
+==== Group::getByUser(User $user) : array
 
 Returns an array of *Group* objects representing all groups which '$user' is a member of.
 
