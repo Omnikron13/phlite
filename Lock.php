@@ -139,6 +139,15 @@ class Lock {
         return $l;
     }
 
+    //TODO: document
+    public static function getByGroup(Group $g) : array {
+        $sql = 'SELECT lockID FROM locks_group_keys WHERE groupID = :g';
+        $q = DB::prepare($sql);
+        $q->bindValue(':g', $g->getID(), PDO::PARAM_INT);
+        $q->execute();
+        return $q->fetchAll(PDO::FETCH_FUNC, [self::class, 'getByID']);
+    }
+
     /******************
      * Key management *
      ******************/
