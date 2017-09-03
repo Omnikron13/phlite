@@ -203,7 +203,6 @@ class User {
         }
         $s = Session::start($u);
         $u->logLogin(true);
-        //TODO: return more useful data (e.g. unhashed session id:key)
         return [
             'success' => true,
             'user'    => $u,
