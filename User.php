@@ -194,6 +194,7 @@ class User {
             }
         }
 
+        //Attempt actual authentication
         if(!$u->checkPassword($password)) {
             $u->logLogin(false);
             return [
@@ -201,6 +202,8 @@ class User {
                 'code'    => self::LOGIN_ERROR['INCORRECT_PASSWORD'],
             ];
         }
+
+        //Success! Start the session
         $s = Session::start($u);
         $u->logLogin(true);
         return [
