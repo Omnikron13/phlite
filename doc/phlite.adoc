@@ -300,7 +300,7 @@ Throws a *GroupException* with code *204* if '$description' is invalid.
 See *validDescription()* for more details.
 
 
-==== Group::validDescription(string $description) : bool
+==== Group::validDescription(?string $description) : bool
 
 Returns *true* if '$description' is a valid group description, otherwise *false*.
 Validity is determined by a regex loaded from the *description_regex* parameter in the *[group]* section of config files.

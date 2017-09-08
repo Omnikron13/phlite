@@ -69,11 +69,11 @@ class Group {
     /***************
      * Description *
      ***************/
-    public function getDescription() : string {
+    public function getDescription() : ?string {
         return $this->description;
     }
 
-    public function setDescription(string $d) : void {
+    public function setDescription(?string $d) : void {
         if(!self::validDescription($d))
             throw new GroupException(GroupException::CODE['DESCRIPTION_INVALID']);
         $sql = 'UPDATE groups SET description = :d WHERE id = :i';
@@ -84,7 +84,9 @@ class Group {
         $this->description = $d;
     }
 
-    public static function validDescription(string $d) : bool {
+    public static function validDescription(?string $d) : bool {
+        if($d === NULL)
+            return true;
         $r = Config::get('group', 'description_regex');
         return preg_match($r, $d);
     }
@@ -143,7 +145,7 @@ class Group {
             throw new GroupException(GroupException::CODE['NAME_INVALID']);
         if(!self::availableName($n))
             throw new GroupException(GroupException::CODE['NAME_UNAVAILABLE']);
-        if($d !== NULL && !self::validDescription($d))
+        if(!self::validDescription($d))
             throw new GroupException(GroupException::CODE['DESCRIPTION_INVALID']);
         $sql = 'INSERT INTO groups(name, description) VALUES(:n, :d)';
         $q = DB::prepare($sql);
