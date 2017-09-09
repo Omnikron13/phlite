@@ -70,11 +70,11 @@ class Lock {
     /***************
      * Description *
      ***************/
-    public function getDescription() : string {
+    public function getDescription() : ?string {
         return $this->description;
     }
 
-    public function setDescription(string $d) : void {
+    public function setDescription(?string $d) : void {
         if(!self::validDescription($d))
             throw new LockException(LockException::CODE['DESCRIPTION_INVALID']);
         $sql = 'UPDATE locks SET description = :d WHERE id = :i';
@@ -85,7 +85,9 @@ class Lock {
         $this->description = $d;
     }
 
-    public static function validDescription(string $d) : bool {
+    public static function validDescription(?string $d) : bool {
+        if($d === NULL)
+            return true;
         $r = Config::get('lock', 'description_regex');
         return preg_match($r, $d);
     }
@@ -105,7 +107,7 @@ class Lock {
             throw new LockException(LockException::CODE['NAME_INVALID']);
         if(!self::availableName($n))
             throw new LockException(LockException::CODE['NAME_UNAVAILABLE']);
-        if($d !== NULL && !self::validDescription($d))
+        if(!self::validDescription($d))
             throw new LockException(LockException::CODE['DESCRIPTION_INVALID']);
         $sql = 'INSERT INTO locks(name, description) VALUES(:n, :d)';
         $q = DB::prepare($sql);
