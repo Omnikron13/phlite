@@ -288,12 +288,12 @@ Returns *false* if '$name' is a group name in use already in the database, other
 
 === Description
 
-==== $group->getDescription() : string
+==== $group->getDescription() : ?string
 
 Returns the *description* of the group.
 
 
-==== $group->setDescription(string $description) : void
+==== $group->setDescription(?string $description) : void
 
 Updates the group's *description* in the database.
 Throws a *GroupException* with code *204* if '$description' is invalid.
