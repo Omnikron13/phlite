@@ -134,7 +134,6 @@ class Lock {
         return $l;
     }
 
-    //TODO: document
     public static function getByGroup(Group $g) : array {
         $sql = 'SELECT lockID FROM locks_group_keys WHERE groupID = :g';
         $q = DB::prepare($sql);

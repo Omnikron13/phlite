@@ -481,6 +481,11 @@ Returns an array of *Lock* objects representing all locks in the database.
 Returns a *Lock* representing the lock referenced by '$id', or *NULL* if no lock with that id found.
 
 
+==== Lock::getByGroup(Group $group) : array
+
+Returns an array of *Lock* objects representing all locks which '$group' holds \'keys' for.
+
+
 === Key Management
 
 ==== $lock->grantGroupKey(Group $group) : void
