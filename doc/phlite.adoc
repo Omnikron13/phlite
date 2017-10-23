@@ -486,6 +486,12 @@ Returns a *Lock* representing the lock referenced by '$id', or *NULL* if no lock
 Returns an array of *Lock* objects representing all locks which '$group' holds \'keys' for.
 
 
+==== Lock::getByUser(User $user, bool $includeGroups = true) : array
+
+Returns an array of *Lock* objects representing all locks which '$user' holds \'keys' for.
+If '$includeGroups' is set to *true* then locks for which groups the user is a member of hold \'keys' for are included in the array.
+
+
 === Key Management
 
 ==== $lock->grantGroupKey(Group $group) : void
