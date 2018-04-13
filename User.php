@@ -105,6 +105,29 @@ class User {
         $this->email = $e;
     }
 
+    //TODO: document
+    public function sendVerifyEmail() : void {
+        $t = random_bytes(Config::get('user', 'email_verify_bytes'));
+        $t = Base64::encode($t);
+        //TODO: prevent duplicate DB entry attempt
+        $sql = 'INSERT INTO users_verify(userID, token) VALUES(:u, :t)';
+        $q = DB::prepare($sql);
+        $q->bindValue(':u', $this->id, PDO::PARAM_INT);
+        $q->bindValue(':t', $t,        PDO::PARAM_STR);
+        $q->execute();
+        $url = Config::get('user', 'email_verify_url')."?id={$this->id}&token={$t}";
+        $plaintext = file_get_contents(Config::get('user', 'email_verify_plaintext_template'), true);
+        $plaintext = str_replace('[url]', $url, $plaintext); //TODO: move url token to config?
+        $html = file_get_contents(Config::get('user', 'email_verify_html_template'), true);
+        $html = str_replace('[url]', $url, $html); //TODO: move url token to config?
+        $e = new Email($this->email, Config::get('user', 'email_verify_subject'));
+        $e->setPlaintext($plaintext);
+        $e->setHTML($html);
+        $e->setHeader('From',     Config::get('user', 'email_verify_from'));
+        $e->setHeader('Reply-To', Config::get('user', 'email_verify_reply-to'));
+        $e->send();
+    }
+
     public static function validEmail(string $e) : bool {
         $r = Config::get('user', 'email_regex');
         return preg_match($r, $e);
