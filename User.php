@@ -128,6 +128,15 @@ class User {
         $e->send();
     }
 
+    //TODO: document
+    public function verified() : bool {
+        $sql = 'SELECT COUNT(*) FROM users_verify WHERE userID = :u';
+        $q = DB::prepare($sql);
+        $q->bindValue(':u', $this->id, PDO::PARAM_INT);
+        $q->execute();
+        return $q->fetchColumn() == 0;
+    }
+
     public static function validEmail(string $e) : bool {
         $r = Config::get('user', 'email_regex');
         return preg_match($r, $e);
