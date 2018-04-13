@@ -107,14 +107,7 @@ class User {
 
     //TODO: document
     public function sendVerifyEmail() : void {
-        $t = random_bytes(Config::get('user', 'email_verify_bytes'));
-        $t = Base64::encode($t);
-        //TODO: prevent duplicate DB entry attempt
-        $sql = 'INSERT INTO users_verify(userID, token) VALUES(:u, :t)';
-        $q = DB::prepare($sql);
-        $q->bindValue(':u', $this->id, PDO::PARAM_INT);
-        $q->bindValue(':t', $t,        PDO::PARAM_STR);
-        $q->execute();
+        $t = $this->generateEmailVerifyToken();
         $url = Config::get('user', 'email_verify_url')."?id={$this->id}&token={$t}";
         $plaintext = file_get_contents(Config::get('user', 'email_verify_plaintext_template'), true);
         $plaintext = str_replace('[url]', $url, $plaintext); //TODO: move url token to config?
