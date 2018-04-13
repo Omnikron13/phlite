@@ -7,6 +7,7 @@ require_once __DIR__.'/DB.php';
 require_once __DIR__.'/Base64.php';
 require_once __DIR__.'/Session.php';
 require_once __DIR__.'/RequestToken.php';
+require_once __DIR__.'/Email.php';
 require_once __DIR__.'/PhliteException.php';
 
 class User {
