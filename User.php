@@ -123,7 +123,7 @@ class User {
 
     //TODO: document
     public function verifyEmail(string $t) : bool {
-        if($this->verified())
+        if($this->emailVerified())
             return true; //TODO: considering throwing instead
         $sql = 'SELECT token FROM users_verify WHERE userID = :u';
         $q = DB::prepare($sql);
@@ -142,7 +142,7 @@ class User {
     public function generateEmailVerifyToken() : string {
         $t = random_bytes(Config::get('user', 'email_verify_bytes'));
         $t = Base64::encode($t);
-        if($this->verified())
+        if($this->emailVerified())
             $sql = 'INSERT INTO users_verify(userID, token) VALUES(:u, :t)';
         else
             $sql = 'UPDATE users_verify SET token = :t WHERE userID = :u';
@@ -154,7 +154,7 @@ class User {
     }
 
     //TODO: document
-    public function verified() : bool {
+    public function emailVerified() : bool {
         $sql = 'SELECT COUNT(*) FROM users_verify WHERE userID = :u';
         $q = DB::prepare($sql);
         $q->bindValue(':u', $this->id, PDO::PARAM_INT);
