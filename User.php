@@ -122,6 +122,23 @@ class User {
     }
 
     //TODO: document
+    public function verifyEmail(string $t) : bool {
+        if($this->verified())
+            return true; //TODO: considering throwing instead
+        $sql = 'SELECT token FROM users_verify WHERE userID = :u';
+        $q = DB::prepare($sql);
+        $q->bindValue(':u', $this->id, PDO::PARAM_INT);
+        $q->execute();
+        if($t != $q->fetchColumn())
+            return false;
+        $sql = 'DELETE FROM users_verify WHERE userID = :u';
+        $q = DB::prepare($sql);
+        $q->bindValue(':u', $this->id, PDO::PARAM_INT);
+        $q->execute();
+        return true;
+    }
+
+    //TODO: document
     public function generateEmailVerifyToken() : string {
         $t = random_bytes(Config::get('user', 'email_verify_bytes'));
         $t = Base64::encode($t);
