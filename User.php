@@ -152,7 +152,6 @@ class User {
         return $t;
     }
 
-    //TODO: document
     public function emailVerified() : bool {
         $sql = 'SELECT COUNT(*) FROM users_verify WHERE userID = :u';
         $q = DB::prepare($sql);
