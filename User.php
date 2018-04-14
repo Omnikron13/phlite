@@ -138,7 +138,6 @@ class User {
         return true;
     }
 
-    //TODO: document
     public function generateEmailVerifyToken() : string {
         $t = random_bytes(Config::get('user', 'email_verify_bytes'));
         $t = Base64::encode($t);
