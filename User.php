@@ -124,7 +124,7 @@ class User {
     //TODO: document
     public function verifyEmail(string $t) : bool {
         if($this->emailVerified())
-            return true; //TODO: considering throwing instead
+            throw new UserException(UserException::CODE['ALREADY_VERIFIED']);
         $sql = 'SELECT token FROM users_verify WHERE userID = :u';
         $q = DB::prepare($sql);
         $q->bindValue(':u', $this->id, PDO::PARAM_INT);
