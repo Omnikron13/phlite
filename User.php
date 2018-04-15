@@ -413,6 +413,7 @@ class UserException extends PhliteException {
         'EMAIL_INVALID'        => self::CODE_PREFIX + 4,
         'EMAIL_UNAVAILABLE'    => self::CODE_PREFIX + 5,
         'PASSWORD_INVALID'     => self::CODE_PREFIX + 6,
+        'ALREADY_VERIFIED'     => self::CODE_PREFIX + 7,
     ];
     protected const MESSAGE = [
         self::CODE['USER_NOT_FOUND']       => 'User not found',
@@ -421,6 +422,7 @@ class UserException extends PhliteException {
         self::CODE['EMAIL_INVALID']        => 'Invalid email address',
         self::CODE['EMAIL_UNAVAILABLE']    => 'Unavailable email address',
         self::CODE['PASSWORD_INVALID']     => 'Invalid password',
+        self::CODE['ALREADY_VERIFIED']     => 'Email already verified',
     ];
 
     public function __construct(int $code) {

@@ -668,6 +668,7 @@ Decodes a string that has been encoded in the 'base64url' format (as described b
 |104  |EMAIL_INVALID        |Invalid email address
 |105  |EMAIL_UNAVAILABLE    |Unavailable email address
 |106  |PASSWORD_INVALID     |Invalid password
+|107  |ALREADY_VERIFIED     |Email already verified
 |======================================================
 
 
