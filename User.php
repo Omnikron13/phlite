@@ -121,7 +121,6 @@ class User {
         $e->send();
     }
 
-    //TODO: document
     public function verifyEmail(string $t) : bool {
         if($this->emailVerified())
             throw new UserException(UserException::CODE['ALREADY_VERIFIED']);

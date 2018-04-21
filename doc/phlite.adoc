@@ -93,6 +93,14 @@ Specifically, it returns *true* if there is no entry in the 'users_verify' table
 if no token was ever generated for the user (with *generateEmailVerifyToken()* or *sendVerifyEmail()*) then it will still return *true* (this allows users to be manually added without requiring verification).
 
 
+==== $user->verifyEmail(string $token) : bool
+
+Returns *true* if '$token' matches that stored in the 'users_verify' table for this user, otherwise *false*.
+If returning *true* the row for this user will also be cleared from the table and subsequent calls to *emailVerified()* will return *true*.
+Throws a *UserException* with code *107* if the user appears to have already verified their email.
+See *generateEmailVerifyToken()* or *sendVerifyEmail()* for generating tokens.
+
+
 ==== $user->generateEmailVerifyToken() : string
 
 Generates and returns a token (in 'base64url' encoding) that can be used to verify a user has control of their registered email address.
