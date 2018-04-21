@@ -722,7 +722,7 @@ Decodes a string that has been encoded in the 'base64url' format (as described b
 
 == COPYRIGHT
 
-Copyright (C) 2017 Joey Sabey <GameFreak7744@gmail.com>
+Copyright (C) 2017-2018 Joey Sabey <GameFreak7744@gmail.com>
 
 Phlite is licensed under the MIT licence, a copy of which is included in the 'LICENCE' file.
 
