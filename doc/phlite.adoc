@@ -87,6 +87,12 @@ Throws a *UserException* with code *104* if '$email' is invalid, code *105* if u
 See *validEmail()* & *availableEmail()* for more details.
 
 
+==== $user->emailVerified() : bool
+Returns *true* if the user has verified their email address, *false* otherwise.
+Specifically, it returns *true* if there is no entry in the 'users_verify' table of the database for this user;
+if no token was ever generated for the user (with *generateEmailVerifyToken()* or *sendVerifyEmail()*) then it will still return *true* (this allows users to be manually added without requiring verification).
+
+
 ==== $user->generateEmailVerifyToken() : string
 
 Generates and returns a token (in 'base64url' encoding) that can be used to verify a user has control of their registered email address.
@@ -94,12 +100,6 @@ Its size (in bytes) is controlled by the *email_verify_bytes* parameter in the *
 If an entry already exists for this user in the 'users_verify' table of the database, it is overwritten and the old token will become invalid.
 This method is useful if you wish to manually send out verification emails with custom email code, email libraries, etc.
 See *sendVerifyEmail()* for an alternative, and *verifyEmail()* for the verification step.
-
-
-==== $user->emailVerified() : bool
-Returns *true* if the user has verified their email address, *false* otherwise.
-Specifically, it returns *true* if there is no entry in the 'users_verify' table of the database for this user;
-if no token was ever generated for the user (with *generateEmailVerifyToken()* or *sendVerifyEmail()*) then it will still return *true* (this allows users to be manually added without requiring verification).
 
 
 ==== User::validEmail(string $email) : bool
