@@ -109,10 +109,11 @@ class User {
     public function sendVerifyEmail() : void {
         $t = $this->generateEmailVerifyToken();
         $url = Config::get('user', 'email_verify_url')."?id={$this->id}&token={$t}";
+        $url_tok = Config::get('user', 'email_verify_url_token');
         $plaintext = file_get_contents(Config::get('user', 'email_verify_plaintext_template'), true);
-        $plaintext = str_replace('[url]', $url, $plaintext); //TODO: move url token to config?
+        $plaintext = str_replace($url_tok, $url, $plaintext);
         $html = file_get_contents(Config::get('user', 'email_verify_html_template'), true);
-        $html = str_replace('[url]', $url, $html); //TODO: move url token to config?
+        $html = str_replace($url_tok, $url, $html);
         $e = new Email($this->email, Config::get('user', 'email_verify_subject'));
         $e->setPlaintext($plaintext);
         $e->setHTML($html);
