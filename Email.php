@@ -17,7 +17,6 @@ class Email {
     protected $plaintext = '';
     protected $html      = '';
 
-    //TODO: document
     public function __construct(string $to, string $subject='') {
         $this->to = $to;
         $this->subject = $subject;
