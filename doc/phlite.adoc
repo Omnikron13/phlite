@@ -681,6 +681,11 @@ Sets the HTML part of the email to the '$html' provided.
 Note that this class always sends multipart emails which may appear blank if the *setPlaintext()* method is not also called.
 
 
+==== $email->setHeader(string $key, string $value) : void
+
+Sets an arbitrary header key : value pair for the email to '$key' : '$value'.
+
+
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 == Exceptions

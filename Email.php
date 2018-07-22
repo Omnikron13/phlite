@@ -32,7 +32,6 @@ class Email {
         $this->html = $t;
     }
 
-    //TODO: document
     public function setHeader(string $k, string $v) : void {
         $this->headers[$k] = $v;
     }
