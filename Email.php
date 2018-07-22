@@ -28,7 +28,6 @@ class Email {
         $this->plaintext = $t;
     }
 
-    //TODO: document
     public function setHTML(string $t) : void {
         $this->html = $t;
     }
