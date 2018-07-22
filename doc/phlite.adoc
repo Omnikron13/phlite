@@ -666,7 +666,7 @@ Decodes a string that has been encoded in the 'base64url' format (as described b
 
 ==== __construct(string $to, string $subject='')
 
-The *Email* constructor accepts the email adress to send to as '$to' and optionally the subject as '$subject'.
+The *Email* constructor accepts the email address to send to as '$to' and optionally the subject as '$subject'.
 
 
 ==== $email->setPlaintext(string $plaintext) : void
