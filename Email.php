@@ -36,7 +36,6 @@ class Email {
         $this->headers[$k] = $v;
     }
 
-    //TODO: document
     public function send() : void {
         mail(
             $this->to,

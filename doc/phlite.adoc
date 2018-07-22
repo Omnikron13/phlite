@@ -686,6 +686,11 @@ Note that this class always sends multipart emails which may appear blank if the
 Sets an arbitrary header key : value pair for the email to '$key' : '$value'.
 
 
+==== $email->send() : void
+
+Sends the email, via the standard PHP *mail()* function.
+
+
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 == Exceptions
