@@ -108,17 +108,17 @@ class User {
     //TODO: document
     public function sendVerifyEmail() : void {
         $t = $this->generateEmailVerifyToken();
-        $url = Config::get('user', 'email_verify_url')."?id={$this->id}&token={$t}";
-        $url_tok = Config::get('user', 'email_verify_url_token');
-        $plaintext = file_get_contents(Config::get('user', 'email_verify_plaintext_template'), true);
+        $url = Config::get('email_verify', 'url')."?id={$this->id}&token={$t}";
+        $url_tok = Config::get('email_verify', 'url_token');
+        $plaintext = file_get_contents(Config::get('email_verify', 'plaintext_template'), true);
         $plaintext = str_replace($url_tok, $url, $plaintext);
-        $html = file_get_contents(Config::get('user', 'email_verify_html_template'), true);
+        $html = file_get_contents(Config::get('email_verify', 'html_template'), true);
         $html = str_replace($url_tok, $url, $html);
-        $e = new Email($this->email, Config::get('user', 'email_verify_subject'));
+        $e = new Email($this->email, Config::get('email_verify', 'subject'));
         $e->setPlaintext($plaintext);
         $e->setHTML($html);
-        $e->setHeader('From',     Config::get('user', 'email_verify_from'));
-        $e->setHeader('Reply-To', Config::get('user', 'email_verify_reply-to'));
+        $e->setHeader('From',     Config::get('email_verify', 'from'));
+        $e->setHeader('Reply-To', Config::get('email_verify', 'reply-to'));
         $e->send();
     }
 
@@ -139,7 +139,7 @@ class User {
     }
 
     public function generateEmailVerifyToken() : string {
-        $t = random_bytes(Config::get('user', 'email_verify_bytes'));
+        $t = random_bytes(Config::get('email_verify', 'bytes'));
         $t = Base64::encode($t);
         if($this->emailVerified())
             $sql = 'INSERT INTO users_verify(userID, token) VALUES(:u, :t)';

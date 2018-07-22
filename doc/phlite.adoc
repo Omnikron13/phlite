@@ -104,7 +104,7 @@ See *generateEmailVerifyToken()* or *sendVerifyEmail()* for generating tokens.
 ==== $user->generateEmailVerifyToken() : string
 
 Generates and returns a token (in 'base64url' encoding) that can be used to verify a user has control of their registered email address.
-Its size (in bytes) is controlled by the *email_verify_bytes* parameter in the *[user]* section of config files.
+Its size (in bytes) is controlled by the *bytes* parameter in the *[email_verify]* section of config files.
 If an entry already exists for this user in the 'users_verify' table of the database, it is overwritten and the old token will become invalid.
 This method is useful if you wish to manually send out verification emails with custom email code, email libraries, etc.
 See *sendVerifyEmail()* for an alternative, and *verifyEmail()* for the verification step.
