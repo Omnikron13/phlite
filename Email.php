@@ -24,7 +24,6 @@ class Email {
         $this->setHeader('Content-type', "multipart/alternative;boundary=$this->boundary");
     }
 
-    //TODO: document
     public function setPlaintext(string $t) : void {
         $this->plaintext = $t;
     }

@@ -669,6 +669,12 @@ Decodes a string that has been encoded in the 'base64url' format (as described b
 The *Email* constructor accepts the email adress to send to as '$to' and optionally the subject as '$subject'.
 
 
+==== $email->setPlaintext(string $plaintext) : void
+
+Sets the plaintext part of the email to the '$plaintext' provided.
+Note that this class always sends multipart emails which may appear blank if the *setHTML()* method is not also called.
+
+
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 == Exceptions
