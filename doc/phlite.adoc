@@ -31,7 +31,7 @@ Ancillary functionality is provided by the *DB* and *Config* classes:
 * *DB* provides access to the database file via a 'PDO' instance.
 * *Config* is used to load configuration files at the start of scripts/pages using *Phlite*.
 
-Additional utility & low level functionality is provided by the *Base64*, *Cookie*, *RequestToken* and *Session* classes.
+Additional utility & low level functionality is provided by the *Email*, *Base64*, *Cookie*, *RequestToken* and *Session* classes.
 These classes likely do not need to be used directly.
 
 The library as a whole can be loaded by simply including the 'Phlite.php' file, which pulls in the classes as dependencies and declares top-level functions.
