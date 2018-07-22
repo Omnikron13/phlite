@@ -105,7 +105,6 @@ class User {
         $this->email = $e;
     }
 
-    //TODO: document
     public function sendVerifyEmail() : void {
         $t = $this->generateEmailVerifyToken();
         $url = Config::get('email_verify', 'url')."?id={$this->id}&token={$t}";
