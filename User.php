@@ -7,6 +7,7 @@ require_once __DIR__.'/DB.php';
 require_once __DIR__.'/Base64.php';
 require_once __DIR__.'/Session.php';
 require_once __DIR__.'/RequestToken.php';
+require_once __DIR__.'/Email.php';
 require_once __DIR__.'/PhliteException.php';
 
 class User {
@@ -102,6 +103,60 @@ class User {
         $q->bindValue(':i', $this->getID(), PDO::PARAM_INT);
         $q->execute();
         $this->email = $e;
+    }
+
+    public function sendVerifyEmail() : void {
+        $t = $this->generateEmailVerifyToken();
+        $url = Config::get('email_verify', 'url')."?id={$this->id}&token={$t}";
+        $url_tok = Config::get('email_verify', 'url_token');
+        $plaintext = file_get_contents(Config::get('email_verify', 'plaintext_template'), true);
+        $plaintext = str_replace($url_tok, $url, $plaintext);
+        $html = file_get_contents(Config::get('email_verify', 'html_template'), true);
+        $html = str_replace($url_tok, $url, $html);
+        $e = new Email($this->email, Config::get('email_verify', 'subject'));
+        $e->setPlaintext($plaintext);
+        $e->setHTML($html);
+        $e->setHeader('From',     Config::get('email_verify', 'from'));
+        $e->setHeader('Reply-To', Config::get('email_verify', 'reply-to'));
+        $e->send();
+    }
+
+    public function verifyEmail(string $t) : bool {
+        if($this->emailVerified())
+            throw new UserException(UserException::CODE['ALREADY_VERIFIED']);
+        $sql = 'SELECT token FROM users_verify WHERE userID = :u';
+        $q = DB::prepare($sql);
+        $q->bindValue(':u', $this->id, PDO::PARAM_INT);
+        $q->execute();
+        if($t != $q->fetchColumn())
+            return false;
+        $sql = 'DELETE FROM users_verify WHERE userID = :u';
+        $q = DB::prepare($sql);
+        $q->bindValue(':u', $this->id, PDO::PARAM_INT);
+        $q->execute();
+        return true;
+    }
+
+    public function generateEmailVerifyToken() : string {
+        $t = random_bytes(Config::get('email_verify', 'bytes'));
+        $t = Base64::encode($t);
+        if($this->emailVerified())
+            $sql = 'INSERT INTO users_verify(userID, token) VALUES(:u, :t)';
+        else
+            $sql = 'UPDATE users_verify SET token = :t WHERE userID = :u';
+        $q = DB::prepare($sql);
+        $q->bindValue(':u', $this->id, PDO::PARAM_INT);
+        $q->bindValue(':t', $t,        PDO::PARAM_STR);
+        $q->execute();
+        return $t;
+    }
+
+    public function emailVerified() : bool {
+        $sql = 'SELECT COUNT(*) FROM users_verify WHERE userID = :u';
+        $q = DB::prepare($sql);
+        $q->bindValue(':u', $this->id, PDO::PARAM_INT);
+        $q->execute();
+        return $q->fetchColumn() == 0;
     }
 
     public static function validEmail(string $e) : bool {
@@ -357,6 +412,7 @@ class UserException extends PhliteException {
         'EMAIL_INVALID'        => self::CODE_PREFIX + 4,
         'EMAIL_UNAVAILABLE'    => self::CODE_PREFIX + 5,
         'PASSWORD_INVALID'     => self::CODE_PREFIX + 6,
+        'ALREADY_VERIFIED'     => self::CODE_PREFIX + 7,
     ];
     protected const MESSAGE = [
         self::CODE['USER_NOT_FOUND']       => 'User not found',
@@ -365,6 +421,7 @@ class UserException extends PhliteException {
         self::CODE['EMAIL_INVALID']        => 'Invalid email address',
         self::CODE['EMAIL_UNAVAILABLE']    => 'Unavailable email address',
         self::CODE['PASSWORD_INVALID']     => 'Invalid password',
+        self::CODE['ALREADY_VERIFIED']     => 'Email already verified',
     ];
 
     public function __construct(int $code) {
