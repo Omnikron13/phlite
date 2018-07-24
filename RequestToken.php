@@ -85,10 +85,9 @@ class RequestToken {
     }
 
     protected static function hash(string $t) : string {
-        $opt = [
-            'cost' => Config::get('request_token', 'hash_cost'),
-        ];
-        return password_hash($t, PASSWORD_BCRYPT, $opt);
+        $a = Config::get('request_token', 'hash_algorithm');
+        $o = Config::get('request_token', 'hash_options');
+        return password_hash($t, $a, $o);
     }
 }
 
