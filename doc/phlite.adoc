@@ -195,7 +195,8 @@ Config parameters for request tokens are in the *[request_token]* section of con
 
 * *max* controls how many request tokens can be active and valid for each user simultaneously.
 * *bytes* controls how many pseudo-random bytes are used to generate the token.
-* *hash_cost* controls the cost parameter of the hashing algorithm (currently always 'BCRYPT') used to hash the token before storing it in the database.
+* *hash_algorithm* controls which hashing algorithm is used to hash the token before storing it in the database. Available options are those available to PHP's *password_hash()* function.
+* *hash_options* controls details of the hashing algorithm, primarily hashing cost. Again available options are those available to PHP's *password_hash()* function, as applicable to the chosen algorithm.
 * *ttl* controls the number of seconds (from script execution time) that tokens will be considered valid for.
 
 
