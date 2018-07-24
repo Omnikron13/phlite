@@ -135,7 +135,8 @@ Returns *false* if '$email' is an email in use already in the database, otherwis
 ==== $user->setPassword(string $password) : void
 
 Updates the user's *password* in the database.
-The password is currently always hashed with the 'BCRYPT' algorithm with the cost being controlled by the *password_hash_cost* config parameter under the *[user]* section.
+The password is hashed with the algorithm specified by the *password_hash_algorithm* config parameter under the *[user]* section, which accepts any options available to PHP's *password_hash()* function.
+The hash cost is controlled by the *password_hash_cost* config parameter, under the *[user]* section.
 Throws a *UserException* with code *106* if '$password' is invalid.
 See *validPassword()* for more details.
 

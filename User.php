@@ -200,7 +200,8 @@ class User {
         $options = [
             'cost' => Config::get('user', 'password_hash_cost'),
         ];
-        return password_hash($p, PASSWORD_BCRYPT, $options);
+        $a = Config::get('user', 'password_hash_algorithm');
+        return password_hash($p, $a, $options);
     }
 
     /***************
