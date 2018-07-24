@@ -197,11 +197,9 @@ class User {
     }
 
     protected static function hashPassword(string $p) : string {
-        $options = [
-            'cost' => Config::get('user', 'password_hash_cost'),
-        ];
         $a = Config::get('user', 'password_hash_algorithm');
-        return password_hash($p, $a, $options);
+        $o = Config::get('user', 'password_hash_options');
+        return password_hash($p, $a, $o);
     }
 
     /***************
