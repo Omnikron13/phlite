@@ -131,10 +131,9 @@ class Session {
     }
 
     protected static function hashKey(string $k) : string {
-        $opt = [
-            'cost' => Config::get('session', 'key_hash_cost'),
-        ];
-        return password_hash($k, PASSWORD_BCRYPT, $opt);
+        $a = Config::get('session', 'key_hash_algorithm');
+        $o = Config::get('session', 'key_hash_options');
+        return password_hash($k, $a, $o);
     }
 }
 
