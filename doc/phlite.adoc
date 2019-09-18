@@ -1,5 +1,5 @@
 = PHLITE(7)
-Joey Sabey <GameFreak7744@gmail.com>
+Joey Sabey <joey.sabey@gmx.com>
 v0.1.0
 :doctype: manpage
 :compat-mode:
@@ -762,7 +762,7 @@ Sends the email, via the standard PHP *mail()* function.
 
 == COPYRIGHT
 
-Copyright (C) 2017-2018 Joey Sabey <GameFreak7744@gmail.com>
+Copyright (C) 2017-2019 Joey Sabey <joey.sabey@gmx.com>
 
 Phlite is licensed under the MIT licence, a copy of which is included in the 'LICENCE' file.
 
